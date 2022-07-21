@@ -45,7 +45,7 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: build-WebGL
-          path: build
+          path: build/WebGL
 
   deploy_gh_pages:
     needs: build_web_gl
