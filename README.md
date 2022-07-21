@@ -1,8 +1,6 @@
-# R4 Studios
-## Medieval vs Fantasy Card Combat Game
+# Medieval vs Fantasy Card Combat Game
 
-# Workflow
-
+##### Workflow
 First you need to clone repository. By default you are in main branch.
 When you need to develop new feature you create new branch in your **local** repository.
 New branch name should be like "<your_name>/<feature_name>". Shorter feature name - better.
@@ -18,3 +16,6 @@ Specify source branch (it's your branch that you are working on) and destination
 
 Notify dev team that you created pull request and wait for review. After getting approve merge your branch and delete it.
 For each new feature/task you will create new branch and after development is finished you need to merge your changes.
+
+##### Technical requirements
+- Unity 2021.3.6f1
