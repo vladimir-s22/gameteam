@@ -44,7 +44,7 @@ jobs:
       # Output
       - uses: actions/upload-artifact@v2
         with:
-          name: build_web_gl
+          name: build-WebGL
           path: build
 
   deploy_gh_pages:
