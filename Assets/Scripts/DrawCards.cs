@@ -12,7 +12,7 @@ public class DrawCards : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        dealCards();
     }
 
     // Update is called once per frame
@@ -21,12 +21,15 @@ public class DrawCards : MonoBehaviour
         
     }
 
-    public void OnClick() 
+    public void dealCards() 
     {
         for (var i = 0; i < 5; i++)
         {
-            GameObject playerCard = Instantiate(Card1, new Vector3(0,0,0), Quaternion.identity);
+            GameObject playerCard = Instantiate(Card1, new Vector3(0, 0, 0), Quaternion.identity);
             playerCard.transform.SetParent(PlayerArea.transform, false);
+
+            GameObject opponentCard = Instantiate(Card2, new Vector3(0, 0, 0), Quaternion.identity);
+            opponentCard.transform.SetParent(OpponentArea.transform, false);
         }
     }
 }
