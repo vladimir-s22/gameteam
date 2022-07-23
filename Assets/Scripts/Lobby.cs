@@ -29,7 +29,7 @@ public class Lobby : MonoBehaviour
     {
         if (player1Selected && player2Selected)                        
         {
-            SceneManager.LoadScene(0);      
+            SceneManager.LoadScene(1);      
         }
     }
     void ConfirmSelection1()                 //This confirms the selection of player 1 
