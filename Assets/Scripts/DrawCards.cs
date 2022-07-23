@@ -23,7 +23,7 @@ public class DrawCards : MonoBehaviour
 
     public void dealCards() 
     {
-        for (var i = 0; i < 5; i++)
+        for (int i = 0; i < 5; i++)
         {
             GameObject playerCard = Instantiate(Card1, new Vector3(0, 0, 0), Quaternion.identity);
             playerCard.transform.SetParent(PlayerArea.transform, false);
