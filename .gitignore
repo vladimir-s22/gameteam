@@ -60,3 +60,4 @@ crashlytics-build.properties
 
 # Mac related files
 .DS_Store
+/**/.DS_Store
