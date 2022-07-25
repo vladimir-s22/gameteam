@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class DrawCards : MonoBehaviour
 {
-    public GameObject Card1;
-    public GameObject Card2;
+    public GameObject Card;
+    public GameObject OpponentCard;
     public GameObject PlayerArea;
     public GameObject OpponentArea;
     
@@ -23,12 +23,12 @@ public class DrawCards : MonoBehaviour
 
     public void dealCards() 
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 7; i++)
         {
-            GameObject playerCard = Instantiate(Card1, new Vector3(0, 0, 0), Quaternion.identity);
+            GameObject playerCard = Instantiate(Card, new Vector3(0, 0, 0), Quaternion.identity);
             playerCard.transform.SetParent(PlayerArea.transform, false);
 
-            GameObject opponentCard = Instantiate(Card2, new Vector3(0, 0, 0), Quaternion.identity);
+            GameObject opponentCard = Instantiate(OpponentCard, new Vector3(0, 0, 0), Quaternion.identity);
             opponentCard.transform.SetParent(OpponentArea.transform, false);
         }
     }
