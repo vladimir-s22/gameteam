@@ -12,10 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0657aa2ab9edc84599d962ca0b6cb52, type: 3}
   m_Name: Pikeman
   m_EditorClassIdentifier: 
-  name: Pikeman
-  description: Man with a spear
-  faction: Holy Roman Empire
-  cost: 3
+  cardTitle: Pikeman
+  cardDescription: Man with the spear
+  cardFaction: Holy Roman Empire
+  cost: 2
   health: 4
-  attack: 2
-  artwork: {fileID: 21300000, guid: b379765e0bdcf1a41927cc5c56df653a, type: 3}
+  damage: 2
+  numberInDeck: 15
+  cardImage: {fileID: 21300000, guid: 09eca4397640c11408b2c5575feae775, type: 3}
+  isSpell: 0
+  isRanged: 0
