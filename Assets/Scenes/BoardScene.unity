@@ -947,17 +947,6 @@ MonoBehaviour:
   generalHealth: {fileID: 1059545779}
   health: 5
   essence: 5
-  essenceBalls:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!1 &625356824
 GameObject:
   m_ObjectHideFlags: 0
@@ -2515,6 +2504,7 @@ MonoBehaviour:
   - {fileID: -2075564145, guid: 7d5d23098d646c747a736373c8731e19, type: 3}
   - {fileID: -1100391952, guid: 7d5d23098d646c747a736373c8731e19, type: 3}
   - {fileID: 158865846, guid: 7d5d23098d646c747a736373c8731e19, type: 3}
+  cardPrefab: {fileID: 3237839534594509041, guid: a4284c962d7151e4695b5a761296a1ed, type: 3}
 --- !u!1 &1789014049
 GameObject:
   m_ObjectHideFlags: 0
@@ -2862,17 +2852,6 @@ MonoBehaviour:
   generalHealth: {fileID: 471711963}
   health: 5
   essence: 5
-  essenceBalls:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!1 &2137463490
 GameObject:
   m_ObjectHideFlags: 0
@@ -3035,7 +3014,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1744064347}
         m_TargetAssemblyTypeName: GameController, Assembly-CSharp
-        m_MethodName: quiteGame
+        m_MethodName: quitGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3093,6 +3072,10 @@ PrefabInstance:
     - target: {fileID: 3237839534594509041, guid: a4284c962d7151e4695b5a761296a1ed, type: 3}
       propertyPath: m_Name
       value: Card
+      objectReference: {fileID: 0}
+    - target: {fileID: 3237839534594509041, guid: a4284c962d7151e4695b5a761296a1ed, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3237839534594509054, guid: a4284c962d7151e4695b5a761296a1ed, type: 3}
       propertyPath: m_Pivot.x
