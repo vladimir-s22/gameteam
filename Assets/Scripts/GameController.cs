@@ -16,7 +16,11 @@ public class GameController : MonoBehaviour
     public Player playerA = null;
     public Player playerB = null;
 
+    public Player activePlayer = null;
+
     public GameObject canvas = null;
+
+    public int turnNumber = 1;
 
     public List<CardData> cards = new List<CardData>();
     public GameObject[] essenceBalls = new GameObject[10];
@@ -31,13 +35,17 @@ public class GameController : MonoBehaviour
     {
         instance = this;
 
-        playerA.isActive = true;
-        playerA.hand = playerAHand;
-        playerA.essence = 1;
+        activePlayer = playerA;
+        
+        playerA.essence = GameController.instance.turnNumber;
+        playerB.essence = GameController.instance.turnNumber;
 
-        playerB.isActive = false;
+        playerA.hand = playerAHand;
         playerB.hand = playerBHand;
-        playerB.essence = 1;
+
+        Debug.Log("[Controller::Awake] Active player is " + activePlayer);
+        Debug.Log("[Controller::Awake] Active player essence is " + activePlayer.essence);
+        Debug.Log("[Controller::Awake] Turn number is " + turnNumber);
     }
     // Start is called before the first frame update
     void Start()
@@ -55,6 +63,23 @@ public class GameController : MonoBehaviour
 
     public void endTurn()
     {
+        if (activePlayer == playerA)
+        {
+            Debug.Log("[Controller::EndTurn::IfActivePlayer] Before switching active player is" + activePlayer);
+            activePlayer = playerB;
+            Debug.Log("[Controller::EndTurn::IfActivePlayer] Active player is" + activePlayer);
+
+            activePlayer.essence = turnNumber;
+            updateEssence();
+        } else
+        {
+            Debug.Log("[Controller::EndTurn::IfActivePlayer] Before switching active player is" + activePlayer);
+            turnNumber++;
+            activePlayer = playerA;
+            Debug.Log("[Controller::EndTurn::IfActivePlayer] Active player is" + activePlayer);
+            activePlayer.essence = turnNumber;
+            updateEssence();
+        }
     }
 
     internal void dealHands()
@@ -90,7 +115,7 @@ public class GameController : MonoBehaviour
     {
         for (int m = 0; m < 10; m++)
         {
-            if (playerA.essence > m)
+            if (activePlayer.essence > m)
             {
                 essenceBalls[m].SetActive(true);
             } else
@@ -98,5 +123,7 @@ public class GameController : MonoBehaviour
                 essenceBalls[m].SetActive(false);
             }
         }
+
+        Debug.Log("[UpdateEssence] Essence updated. Active player is " + activePlayer + " and his essence is " + activePlayer.essence);
     }
 }

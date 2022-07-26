@@ -15,7 +15,7 @@ MonoBehaviour:
   cardTitle: Arbalester
   cardDescription: Ranged Unit
   cardFaction: Holy Roman Empire
-  cost: 2
+  cost: 1
   health: 3
   damage: 3
   numberInDeck: 15
