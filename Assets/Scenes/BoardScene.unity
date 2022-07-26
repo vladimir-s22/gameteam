@@ -2364,7 +2364,9 @@ MonoBehaviour:
     isActive: 0
   playerA: {fileID: 526089648}
   playerB: {fileID: 2033001786}
+  activePlayer: {fileID: 0}
   canvas: {fileID: 1418501039}
+  turnNumber: 1
   cards:
   - {fileID: 11400000, guid: f7de9623c5f3b5c4cb7f93f4f895800a, type: 2}
   - {fileID: 11400000, guid: aa1c00d04bc7efa4b955e253be134429, type: 2}
