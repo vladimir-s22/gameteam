@@ -8,9 +8,12 @@ public class Player : MonoBehaviour
 
     public Image generalImage = null;
     public Image generalHealth = null;
+    public Hand hand = null;
 
-    public int health = 5;
-    public int essence = 5;
+    public int health = 20;
+    public int essence = 1;
+
+    public bool isActive = false;
 
     // Start is called before the first frame update
     void Start()
