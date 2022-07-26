@@ -248,7 +248,7 @@ GameObject:
   - component: {fileID: 3237839533248558035}
   - component: {fileID: 3237839533248558034}
   m_Layer: 5
-  m_Name: CardBack
+  m_Name: CardBackImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -784,7 +784,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3237839534378859751}
-  - component: {fileID: 3237839534378859748}
   m_Layer: 5
   m_Name: CardGraphics
   m_TagString: Untagged
@@ -799,7 +798,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3237839534378859750}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -821,26 +820,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &3237839534378859748
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3237839534378859750}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4058db3f3067d224db7998639397ce61, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3237839534394520331
 GameObject:
   m_ObjectHideFlags: 0
@@ -927,6 +906,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3237839534594509054}
   - component: {fileID: 7680752084302411906}
+  - component: {fileID: 1831346547630347164}
+  - component: {fileID: 5552426492733636700}
   m_Layer: 5
   m_Name: Card
   m_TagString: Untagged
@@ -975,6 +956,30 @@ MonoBehaviour:
   health: {fileID: 3237839535056050495}
   damage: {fileID: 3237839534394520329}
   cardImage: {fileID: 3237839533063979536}
+--- !u!114 &1831346547630347164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3237839534594509041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36a7a6059785417408c0bb34a6a0e574, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!225 &5552426492733636700
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3237839534594509041}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &3237839535056050481
 GameObject:
   m_ObjectHideFlags: 0

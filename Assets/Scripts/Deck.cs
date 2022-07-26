@@ -53,16 +53,6 @@ public class Deck
             card.initialize();
             
             return card;
-            // Animator animator = newCard.GetComponentInChildren<Animator>();
-            // if (animator)
-            // {
-            //     animator.CrossFade(animName, 0);
-            //     return card;
-            // } else
-            // {
-            //     Debug.LogError("No animator found");
-            //     return null;
-            // }
         } else
         {
             Debug.LogError("No card component found");
