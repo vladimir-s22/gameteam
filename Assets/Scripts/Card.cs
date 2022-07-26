@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Card : MonoBehaviour
+public class Card : MonoBehaviour, IDropHandler
 {
     public CardData cardData = null;
 
@@ -36,4 +37,11 @@ public class Card : MonoBehaviour
         damage.sprite = GameController.instance.healthNumbers[cardData.damage];
     }
 
+    public void OnDrop(PointerEventData eventData)
+    {
+        if (gameObject.transform.parent.name == "DropZone")
+        {
+            Debug.Log("Dropped card on card");
+        }
+    }
 }
