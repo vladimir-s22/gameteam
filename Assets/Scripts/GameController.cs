@@ -28,8 +28,8 @@ public class GameController : MonoBehaviour
     public List<CardData> cards = new List<CardData>();
     public GameObject[] essenceBalls = new GameObject[10];
 
-    public Sprite[] healthNumbers = new Sprite[10];
-    public Sprite[] damageNumbers = new Sprite[10];
+    public Sprite[] healthNumbers = new Sprite[21];
+    public Sprite[] damageNumbers = new Sprite[21];
     public Sprite[] costNumbers = new Sprite[10];
 
     public GameObject cardPrefab = null;
