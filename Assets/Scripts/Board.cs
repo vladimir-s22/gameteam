@@ -11,8 +11,8 @@ public class Board
     public void addCard(Card card, Board board)
     {
         GameObject targetBoardArea = board.boardArea;
-        Debug.Log("[Board::addCard] Board is " + board);
-        Debug.Log("[Board::addCard] BoardArea is " + board.boardArea);
+        // Debug.Log("[Board::addCard] Board is " + board);
+        // Debug.Log("[Board::addCard] BoardArea is " + board.boardArea);
         cards.Add(createCard(card, targetBoardArea));
     }
 
