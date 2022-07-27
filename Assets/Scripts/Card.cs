@@ -45,7 +45,7 @@ public class Card : MonoBehaviour, IDropHandler, IPointerDownHandler
         health.sprite = GameController.instance.healthNumbers[cardData.health];
         cardHealth = cardData.health;
 
-        damage.sprite = GameController.instance.healthNumbers[cardData.damage];
+        damage.sprite = GameController.instance.damageNumbers[cardData.damage];
         cardDamage = cardData.damage;
     }
 
