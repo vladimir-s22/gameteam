@@ -9,16 +9,20 @@ public class DropZone : MonoBehaviour, IDropHandler
     {
         GameObject dragObject = eventData.pointerDrag;
         Card card = dragObject.GetComponent<Card>();
+        Board targetBoard = GameController.instance.activePlayer.board;
+        Hand sourceHand = GameController.instance.activePlayer.hand;
 
-        if (GameController.instance.activePlayer.essence >= card.cardData.cost)
+        if (GameController.instance.activePlayer.essence >= card.cardData.cost && card.isDraggable == true)
         {
-            card.transform.SetParent(gameObject.transform, false);
+            // card.transform.SetParent(gameObject.transform, false);
+            card.isDraggable = false;
 
+            sourceHand.moveCardtoDropZone(card, targetBoard);
             GameController.instance.activePlayer.essence -= card.cardData.cost;
             GameController.instance.updateEssence();
         }
 
-        Debug.Log("    [DropZone::onDrop] Active player is " + GameController.instance.activePlayer);
-        Debug.Log("    [DropZone::onDrop] Active player essence is " + GameController.instance.activePlayer.essence);
+        Debug.Log("[DropZone::onDrop] Active player is " + GameController.instance.activePlayer);
+        Debug.Log("[DropZone::onDrop] Active player essence is " + GameController.instance.activePlayer.essence);
     }
 }

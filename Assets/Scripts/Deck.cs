@@ -50,6 +50,7 @@ public class Deck
         if (card)
         {
             card.cardData = RandomCard();
+            card.isDraggable = false;
             card.initialize();
             
             return card;

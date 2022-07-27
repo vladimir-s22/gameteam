@@ -13,6 +13,9 @@ public class GameController : MonoBehaviour
     public Hand playerAHand = new Hand();
     public Hand playerBHand = new Hand();
 
+    public Board playerABoard = new Board();
+    public Board playerBBoard = new Board();
+
     public Player playerA = null;
     public Player playerB = null;
 
@@ -30,22 +33,28 @@ public class GameController : MonoBehaviour
     public Sprite[] costNumbers = new Sprite[10];
 
     public GameObject cardPrefab = null;
+    public int cardDamage;
 
     void Awake()
     {
         instance = this;
+        cardDamage = -1;
 
         activePlayer = playerA;
+        playerA.generalActiveEffect.SetActive(true);
         
         playerA.essence = GameController.instance.turnNumber;
         playerB.essence = GameController.instance.turnNumber;
 
         playerA.hand = playerAHand;
-        playerB.hand = playerBHand;
+        Debug.Log("[Controller::Awake] Current playerA board is " + playerA.board.boardArea);
 
-        Debug.Log("[Controller::Awake] Active player is " + activePlayer);
-        Debug.Log("[Controller::Awake] Active player essence is " + activePlayer.essence);
-        Debug.Log("[Controller::Awake] Turn number is " + turnNumber);
+        playerB.hand = playerBHand;
+        Debug.Log("[Controller::Awake] Current playerB board is " + playerB.board.boardArea);
+
+        // Debug.Log("[Controller::Awake] Active player is " + activePlayer);
+        // Debug.Log("[Controller::Awake] Active player essence is " + activePlayer.essence);
+        // Debug.Log("[Controller::Awake] Turn number is " + turnNumber);
     }
     // Start is called before the first frame update
     void Start()
@@ -54,6 +63,7 @@ public class GameController : MonoBehaviour
         playerBDeck.Create();
         updateEssence();
         dealHands();
+        updateHands();
     }
 
     public void quitGame()
@@ -65,21 +75,30 @@ public class GameController : MonoBehaviour
     {
         if (activePlayer == playerA)
         {
-            Debug.Log("[Controller::EndTurn::IfActivePlayer] Before switching active player is" + activePlayer);
+            // Debug.Log("[Controller::EndTurn::IfActivePlayer] Before switching active player is" + activePlayer);
             activePlayer = playerB;
-            Debug.Log("[Controller::EndTurn::IfActivePlayer] Active player is" + activePlayer);
+            playerA.generalActiveEffect.SetActive(false);
+            playerB.generalActiveEffect.SetActive(true);
+            playerB.board.activateCards();
+            playerA.board.deactivateCards();
+            // Debug.Log("[Controller::EndTurn::IfActivePlayer] Active player is" + activePlayer);
 
             activePlayer.essence = turnNumber;
             updateEssence();
         } else
         {
-            Debug.Log("[Controller::EndTurn::IfActivePlayer] Before switching active player is" + activePlayer);
+            // Debug.Log("[Controller::EndTurn::IfActivePlayer] Before switching active player is" + activePlayer);
             turnNumber++;
             activePlayer = playerA;
-            Debug.Log("[Controller::EndTurn::IfActivePlayer] Active player is" + activePlayer);
+            playerA.generalActiveEffect.SetActive(true);
+            playerB.generalActiveEffect.SetActive(false);
+            playerA.board.activateCards();
+            playerB.board.deactivateCards();
+            // Debug.Log("[Controller::EndTurn::IfActivePlayer] Active player is" + activePlayer);
             activePlayer.essence = turnNumber;
             updateEssence();
         }
+        updateHands();
     }
 
     internal void dealHands()
@@ -102,12 +121,6 @@ public class GameController : MonoBehaviour
         if (card == null)
             return false;
 
-        if (fromHand.isActive)
-            if (card.cardData.cost <= usingOnPlayer.essence)
-            {
-
-            }
-
         return valid;
     }
 
@@ -125,5 +138,18 @@ public class GameController : MonoBehaviour
         }
 
         Debug.Log("[UpdateEssence] Essence updated. Active player is " + activePlayer + " and his essence is " + activePlayer.essence);
+    }
+
+    internal void updateHands()
+    {
+        if (activePlayer == playerA)
+        {
+            playerA.hand.activateCards();
+            playerB.hand.deactivateCards();
+        } else
+        {
+            playerB.hand.activateCards();
+            playerA.hand.deactivateCards();
+        }
     }
 }
