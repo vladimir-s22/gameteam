@@ -2,16 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Card", menuName = "Generals")]
+[CreateAssetMenu(fileName = "New Card", menuName = "GameTeam/Generals")]
 public class Generals : ScriptableObject
 {
-    public new string name;
-    public string description;
+    public string generalTitle;
+    public string generalDescription;
+    public string generalFaction;
 
     public Sprite design;
-
-    public int manacost;
-    public int attack;
+    
     public int health;
     
 
