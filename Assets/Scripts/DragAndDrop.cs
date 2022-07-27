@@ -9,18 +9,31 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        originalPosition = transform.position;
+        Card card = GetComponent<Card>();
+
+        if (card.isDraggable)
+            originalPosition = transform.position;
+            
         GetComponent<CanvasGroup>().blocksRaycasts = false;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        transform.position += (Vector3)eventData.delta;
+        Card card = GetComponent<Card>();
+
+        if (card.isDraggable)
+            transform.position += (Vector3)eventData.delta;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        transform.position = originalPosition;
+        Card card = GetComponent<Card>();
+
+        if (card.isDraggable)
+        {
+            transform.position = originalPosition;
+        }
+
         GetComponent<CanvasGroup>().blocksRaycasts = true;
     }
 }
