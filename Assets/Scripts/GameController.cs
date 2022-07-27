@@ -2,13 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
     static public GameController instance = null;
 
     public Deck playerADeck = new Deck();
+    public Image playerAcardsInDeck;
+
     public Deck playerBDeck = new Deck();
+    public Image playerBcardsInDeck;
 
     public Hand playerAHand = new Hand();
     public Hand playerBHand = new Hand();
@@ -33,13 +37,11 @@ public class GameController : MonoBehaviour
     public Sprite[] costNumbers = new Sprite[10];
 
     public GameObject cardPrefab = null;
-    public int cardDamage;
+    public Card playedCard;
 
     void Awake()
     {
         instance = this;
-        cardDamage = -1;
-
         activePlayer = playerA;
         playerA.generalActiveEffect.SetActive(true);
         
@@ -47,10 +49,10 @@ public class GameController : MonoBehaviour
         playerB.essence = GameController.instance.turnNumber;
 
         playerA.hand = playerAHand;
-        Debug.Log("[Controller::Awake] Current playerA board is " + playerA.board.boardArea);
+        // Debug.Log("[Controller::Awake] Current playerA board is " + playerA.board.boardArea);
 
         playerB.hand = playerBHand;
-        Debug.Log("[Controller::Awake] Current playerB board is " + playerB.board.boardArea);
+        // Debug.Log("[Controller::Awake] Current playerB board is " + playerB.board.boardArea);
 
         // Debug.Log("[Controller::Awake] Active player is " + activePlayer);
         // Debug.Log("[Controller::Awake] Active player essence is " + activePlayer.essence);
@@ -61,8 +63,13 @@ public class GameController : MonoBehaviour
     {
         playerADeck.Create();
         playerBDeck.Create();
+
         updateEssence();
         dealHands();
+
+        playerAcardsInDeck.sprite = GameController.instance.healthNumbers[playerADeck.cardDatas.Count];
+        playerBcardsInDeck.sprite = GameController.instance.healthNumbers[playerBDeck.cardDatas.Count];
+
         updateHands();
     }
 
@@ -77,6 +84,11 @@ public class GameController : MonoBehaviour
         {
             // Debug.Log("[Controller::EndTurn::IfActivePlayer] Before switching active player is" + activePlayer);
             activePlayer = playerB;
+            if (playerBDeck.cardDatas.Count > 0 && playerBHand.cards[6] == null)
+            {
+                playerBDeck.dealCard(playerB.hand);
+            }
+
             playerA.generalActiveEffect.SetActive(false);
             playerB.generalActiveEffect.SetActive(true);
             playerB.board.activateCards();
@@ -90,6 +102,11 @@ public class GameController : MonoBehaviour
             // Debug.Log("[Controller::EndTurn::IfActivePlayer] Before switching active player is" + activePlayer);
             turnNumber++;
             activePlayer = playerA;
+            if (playerADeck.cardDatas.Count > 0 && playerAHand.cards[6] == null)
+            {
+                playerADeck.dealCard(playerA.hand);
+            }
+
             playerA.generalActiveEffect.SetActive(true);
             playerB.generalActiveEffect.SetActive(false);
             playerA.board.activateCards();
@@ -99,6 +116,8 @@ public class GameController : MonoBehaviour
             updateEssence();
         }
         updateHands();
+        playerAcardsInDeck.sprite = GameController.instance.healthNumbers[playerADeck.cardDatas.Count];
+        playerBcardsInDeck.sprite = GameController.instance.healthNumbers[playerBDeck.cardDatas.Count];
     }
 
     internal void dealHands()
