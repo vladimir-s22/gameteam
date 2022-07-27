@@ -19,6 +19,6 @@ MonoBehaviour:
   health: 1
   damage: 2
   numberInDeck: 15
-  cardImage: {fileID: 21300000, guid: 09eca4397640c11408b2c5575feae775, type: 3}
+  cardImage: {fileID: 21300000, guid: ffa208c6be801ef4fbca8e23ff3939bb, type: 3}
   isSpell: 0
   isRanged: 0
