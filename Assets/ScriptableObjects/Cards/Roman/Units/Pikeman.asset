@@ -15,10 +15,10 @@ MonoBehaviour:
   cardTitle: Pikeman
   cardDescription: Man with the spear
   cardFaction: Holy Roman Empire
-  cost: 1
-  health: 1
+  cost: 3
+  health: 4
   damage: 2
-  numberInDeck: 10
-  cardImage: {fileID: 21300000, guid: ffa208c6be801ef4fbca8e23ff3939bb, type: 3}
+  numberInDeck: 3
+  cardImage: {fileID: 21300000, guid: 7cb5ba844cb573349b1c1ce8617261f6, type: 3}
   isSpell: 0
   isRanged: 0

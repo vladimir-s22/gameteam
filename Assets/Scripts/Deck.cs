@@ -6,15 +6,28 @@ using UnityEngine;
 public class Deck
 {
     public List<CardData> cardDatas = new List<CardData>();
+    public string faction;
 
     public void Create()
     {
         List<CardData> cardDataList = new List<CardData>();
-        foreach (CardData cardData in GameController.instance.cards)
+        if (faction == "eldritch")
         {
-            for (int i = 0; i < cardData.numberInDeck; i++)
+            foreach (CardData cardData in GameController.instance.eldritchCards)
             {
-                cardDataList.Add(cardData);
+                for (int i = 0; i < cardData.numberInDeck; i++)
+                {
+                    cardDataList.Add(cardData);
+                }
+            }
+        } else
+        {
+            foreach (CardData cardData in GameController.instance.romanCards)
+            {
+                for (int i = 0; i < cardData.numberInDeck; i++)
+                {
+                    cardDataList.Add(cardData);
+                }
             }
         }
 
