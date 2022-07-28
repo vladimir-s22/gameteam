@@ -42,7 +42,7 @@ public class Card : MonoBehaviour, IDropHandler, IPointerDownHandler
 
         cardImage.sprite = cardData.cardImage;
 
-        cost.sprite = GameController.instance.healthNumbers[cardData.cost];
+        cost.sprite = GameController.instance.costNumbers[cardData.cost];
         health.sprite = GameController.instance.healthNumbers[cardData.health];
         cardHealth = cardData.health;
 
