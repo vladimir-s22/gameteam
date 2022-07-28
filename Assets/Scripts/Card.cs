@@ -25,6 +25,7 @@ public class Card : MonoBehaviour, IDropHandler, IPointerDownHandler
     public bool isActive = false;
 
     public GameObject activeEffect = null;
+    public GameObject playedEffect = null;
     public GameObject cardBack = null;
 
     public void initialize()
@@ -45,7 +46,7 @@ public class Card : MonoBehaviour, IDropHandler, IPointerDownHandler
         health.sprite = GameController.instance.healthNumbers[cardData.health];
         cardHealth = cardData.health;
 
-        damage.sprite = GameController.instance.healthNumbers[cardData.damage];
+        damage.sprite = GameController.instance.damageNumbers[cardData.damage];
         cardDamage = cardData.damage;
     }
 
@@ -75,21 +76,25 @@ public class Card : MonoBehaviour, IDropHandler, IPointerDownHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         Card card = GetComponent<Card>();
-        
-        if (GameController.instance.cardDamage == -1)
+
+        if (GameController.instance.playedCard == null)
         {
             if (card.isActive)
             {
-                GameController.instance.cardDamage = card.cardDamage;
+                GameController.instance.playedCard = card;
                 card.isActive = false;
                 card.activeEffect.SetActive(false);
+                card.playedEffect.SetActive(true);
             }
         } else
         {
             if (card.transform.parent.name == "DropZone")
             {
-                card.dealDamage(cardDamage);
-                GameController.instance.cardDamage = -1;
+                card.dealDamage(GameController.instance.playedCard.cardDamage);
+                GameController.instance.playedCard.dealDamage(card.cardDamage);
+                
+                GameController.instance.playedCard.playedEffect.SetActive(false);
+                GameController.instance.playedCard = null;
             }
         }
     }
