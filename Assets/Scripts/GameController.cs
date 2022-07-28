@@ -34,6 +34,7 @@ public class GameController : MonoBehaviour
 
     public Sprite[] healthNumbers = new Sprite[21];
     public Sprite[] damageNumbers = new Sprite[21];
+    public Sprite[] redGlowNumbers = new Sprite[21];
     public Sprite[] costNumbers = new Sprite[10];
 
     public GameObject cardPrefab = null;
