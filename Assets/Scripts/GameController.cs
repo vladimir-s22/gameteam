@@ -39,12 +39,14 @@ public class GameController : MonoBehaviour
     public GameObject cardPrefab = null;
     public Card playedCard;
 
+    public GameObject endTurnButton;
+
     void Awake()
     {
         instance = this;
         activePlayer = playerA;
         playerA.generalActiveEffect.SetActive(true);
-        
+
         playerA.essence = GameController.instance.turnNumber;
         playerB.essence = GameController.instance.turnNumber;
 
@@ -118,6 +120,7 @@ public class GameController : MonoBehaviour
         updateHands();
         playerAcardsInDeck.sprite = GameController.instance.healthNumbers[playerADeck.cardDatas.Count];
         playerBcardsInDeck.sprite = GameController.instance.healthNumbers[playerBDeck.cardDatas.Count];
+        endTurnButton.SetActive(true);
     }
 
     internal void dealHands()
@@ -170,5 +173,11 @@ public class GameController : MonoBehaviour
             playerB.hand.activateCards();
             playerA.hand.deactivateCards();
         }
+    }
+
+    public void hideActiveHand()
+    {
+        GameController.instance.activePlayer.hand.deactivateCards();
+        endTurnButton.SetActive(false);
     }
 }
