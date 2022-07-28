@@ -10,9 +10,5 @@ public class Generals : ScriptableObject
     public string generalFaction;
 
     public Sprite design;
-    
     public int health;
-    
-
-
 }
