@@ -2572,16 +2572,16 @@ MonoBehaviour:
   - {fileID: 226766637, guid: 9a33679a5c6d851438da930b57477999, type: 3}
   - {fileID: 1704412609, guid: 9a33679a5c6d851438da930b57477999, type: 3}
   costNumbers:
-  - {fileID: 1774322332, guid: 904e2f37345f6694f976e2cbdb573896, type: 3}
-  - {fileID: -1820802498, guid: 904e2f37345f6694f976e2cbdb573896, type: 3}
-  - {fileID: 1871579269, guid: 904e2f37345f6694f976e2cbdb573896, type: 3}
-  - {fileID: 1830917515, guid: 904e2f37345f6694f976e2cbdb573896, type: 3}
-  - {fileID: -1620863658, guid: 904e2f37345f6694f976e2cbdb573896, type: 3}
-  - {fileID: -1187178809, guid: 904e2f37345f6694f976e2cbdb573896, type: 3}
-  - {fileID: -1203677424, guid: 904e2f37345f6694f976e2cbdb573896, type: 3}
-  - {fileID: -1726911077, guid: 904e2f37345f6694f976e2cbdb573896, type: 3}
-  - {fileID: -906629514, guid: 904e2f37345f6694f976e2cbdb573896, type: 3}
-  - {fileID: -1479465192, guid: 904e2f37345f6694f976e2cbdb573896, type: 3}
+  - {fileID: -112633547, guid: 7133336d01093cc489191bc69a8e86cc, type: 3}
+  - {fileID: 1119939064, guid: 7133336d01093cc489191bc69a8e86cc, type: 3}
+  - {fileID: -1268568855, guid: 7133336d01093cc489191bc69a8e86cc, type: 3}
+  - {fileID: -1715194808, guid: 7133336d01093cc489191bc69a8e86cc, type: 3}
+  - {fileID: -1917854413, guid: 7133336d01093cc489191bc69a8e86cc, type: 3}
+  - {fileID: 230502180, guid: 7133336d01093cc489191bc69a8e86cc, type: 3}
+  - {fileID: 1930334321, guid: 7133336d01093cc489191bc69a8e86cc, type: 3}
+  - {fileID: -2086357104, guid: 7133336d01093cc489191bc69a8e86cc, type: 3}
+  - {fileID: -1621690027, guid: 7133336d01093cc489191bc69a8e86cc, type: 3}
+  - {fileID: -158884294, guid: 7133336d01093cc489191bc69a8e86cc, type: 3}
   cardPrefab: {fileID: 3237839534594509041, guid: a4284c962d7151e4695b5a761296a1ed, type: 3}
   playedCard: {fileID: 0}
   endTurnButton: {fileID: 1506692630}
