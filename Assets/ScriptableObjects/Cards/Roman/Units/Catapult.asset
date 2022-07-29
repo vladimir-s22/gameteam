@@ -10,15 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c0657aa2ab9edc84599d962ca0b6cb52, type: 3}
-  m_Name: Catapult
+  m_Name: catapult
   m_EditorClassIdentifier: 
   cardTitle: Catapult
-  cardDescription: Ranged unit - 2x Damage
+  cardDescription: 
   cardFaction: Holy Roman Empire
   cost: 3
   health: 2
   damage: 3
   numberInDeck: 1
-  cardImage: {fileID: 21300000, guid: b379765e0bdcf1a41927cc5c56df653a, type: 3}
+  cardImage: {fileID: 21300000, guid: 31c2c495704bb4747baec494e3126493, type: 3}
   isSpell: 0
+  spellType: 
   isRanged: 1
+  thorns: 0
+  armour: 0

@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c0657aa2ab9edc84599d962ca0b6cb52, type: 3}
-  m_Name: Man-at-Arms
+  m_Name: cannoneer
   m_EditorClassIdentifier: 
-  cardTitle: Man-at-Arms
-  cardDescription: Heavily armed soldier
+  cardTitle: Hand Cannoneer
+  cardDescription: Ranged Unit
   cardFaction: Holy Roman Empire
-  cost: 1
-  health: 2
-  damage: 1
-  numberInDeck: 3
-  cardImage: {fileID: 21300000, guid: 09eca4397640c11408b2c5575feae775, type: 3}
+  cost: 5
+  health: 3
+  damage: 5
+  numberInDeck: 2
+  cardImage: {fileID: 21300000, guid: f5e8e5be8e1bebd418b8ab6edb58129e, type: 3}
   isSpell: 0
-  isRanged: 0
+  isRanged: 1

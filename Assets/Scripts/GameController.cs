@@ -78,8 +78,8 @@ public class GameController : MonoBehaviour
         updateEssence();
         dealHands();
 
-        playerAcardsInDeck.sprite = GameController.instance.healthNumbers[playerADeck.cardDatas.Count];
-        playerBcardsInDeck.sprite = GameController.instance.healthNumbers[playerBDeck.cardDatas.Count];
+        // playerAcardsInDeck.sprite = GameController.instance.healthNumbers[playerADeck.cardDatas.Count];
+        // playerBcardsInDeck.sprite = GameController.instance.healthNumbers[playerBDeck.cardDatas.Count];
 
         updateHands();
     }
@@ -95,7 +95,7 @@ public class GameController : MonoBehaviour
         {
             // Debug.Log("[Controller::EndTurn::IfActivePlayer] Before switching active player is" + activePlayer);
             activePlayer = playerB;
-            if (playerBDeck.cardDatas.Count > 0 && playerBHand.cards[6] == null)
+            if (playerBDeck.cardDatas.Count > 0)
             {
                 playerBDeck.dealCard(playerB.hand);
             }
@@ -113,7 +113,7 @@ public class GameController : MonoBehaviour
             // Debug.Log("[Controller::EndTurn::IfActivePlayer] Before switching active player is" + activePlayer);
             turnNumber++;
             activePlayer = playerA;
-            if (playerADeck.cardDatas.Count > 0 && playerAHand.cards[6] == null)
+            if (playerADeck.cardDatas.Count > 0)
             {
                 playerADeck.dealCard(playerA.hand);
             }
@@ -127,8 +127,8 @@ public class GameController : MonoBehaviour
             updateEssence();
         }
         updateHands();
-        playerAcardsInDeck.sprite = GameController.instance.healthNumbers[playerADeck.cardDatas.Count];
-        playerBcardsInDeck.sprite = GameController.instance.healthNumbers[playerBDeck.cardDatas.Count];
+        // playerAcardsInDeck.sprite = GameController.instance.healthNumbers[playerADeck.cardDatas.Count];
+        // playerBcardsInDeck.sprite = GameController.instance.healthNumbers[playerBDeck.cardDatas.Count];
         endTurnButton.SetActive(true);
     }
 
@@ -145,20 +145,6 @@ public class GameController : MonoBehaviour
         }
     }
 
-    internal bool useCard(Card card, Player usingOnPlayer, Hand fromHand)
-    {
-        return true;
-    }
-
-    internal bool cardValid(Card card, Player usingOnPlayer, Hand fromHand)
-    {
-        bool valid = false;
-        if (card == null)
-            return false;
-
-        return valid;
-    }
-
     internal void updateEssence()
     {
         for (int m = 0; m < 10; m++)
@@ -172,7 +158,7 @@ public class GameController : MonoBehaviour
             }
         }
 
-        Debug.Log("[UpdateEssence] Essence updated. Active player is " + activePlayer + " and his essence is " + activePlayer.essence);
+        // Debug.Log("[GameController::updateEssence] Essence updated. Active player is " + activePlayer + " and his essence is " + activePlayer.essence);
     }
 
     internal void updateHands()
