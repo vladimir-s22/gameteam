@@ -13,6 +13,11 @@ public class MainMenu : MonoBehaviour {
         SceneManager.LoadScene(1);
     }
 
+    public void howToPlayScene() 
+    {
+        SceneManager.LoadScene(4);
+    }
+
     public void loreScene() 
     {
         SceneManager.LoadScene(3);
