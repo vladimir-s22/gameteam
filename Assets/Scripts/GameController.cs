@@ -29,7 +29,9 @@ public class GameController : MonoBehaviour
 
     public int turnNumber = 1;
 
-    public List<CardData> cards = new List<CardData>();
+    public List<CardData> romanCards = new List<CardData>();
+    public List<CardData> eldritchCards = new List<CardData>();
+
     public GameObject[] essenceBalls = new GameObject[10];
 
     public Sprite[] healthNumbers = new Sprite[21];
@@ -38,6 +40,12 @@ public class GameController : MonoBehaviour
     public Sprite[] costNumbers = new Sprite[10];
 
     public GameObject cardPrefab = null;
+
+    public GameObject eldritchUnitPrefab;
+    public GameObject eldritchSpellPrefab;
+    public GameObject romanUnitPrefab;
+    public GameObject romanSpellPrefab;
+
     public Card playedCard;
 
     public GameObject endTurnButton;
@@ -129,6 +137,10 @@ public class GameController : MonoBehaviour
         for (int i = 0; i < 5; i++)
         {
             playerADeck.dealCard(playerA.hand);
+        }
+
+        for (int i = 0; i < 4; i++)
+        {
             playerBDeck.dealCard(playerB.hand);
         }
     }
