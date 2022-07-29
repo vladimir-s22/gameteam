@@ -18,7 +18,18 @@ public class Board
 
     private Card createCard(Card card, GameObject targetBoardArea)
     {
-        GameObject newCard = GameObject.Instantiate(GameController.instance.cardPrefab,
+        GameObject cardPrefab;
+
+        if (card.cardData.cardFaction == "Holy Roman Empire")
+        {
+            cardPrefab = GameController.instance.romanUnitPrefab;
+        }
+        else
+        {
+            cardPrefab = GameController.instance.eldritchUnitPrefab;
+        }
+
+        GameObject newCard = GameObject.Instantiate(cardPrefab,
                                                     GameController.instance.canvas.gameObject.transform);
 
         newCard.transform.SetParent(targetBoardArea.transform, false);
@@ -45,8 +56,11 @@ public class Board
         {
             if (card != null)
             {
-                card.isActive = true;
-                card.activeEffect.SetActive(true);
+                if (!card.isRooted)
+                {
+                    card.isActive = true;
+                    card.activeEffect.SetActive(true);
+                }
             }
         }
     }

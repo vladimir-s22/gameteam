@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c0657aa2ab9edc84599d962ca0b6cb52, type: 3}
-  m_Name: Pikeman
+  m_Name: pikeman
   m_EditorClassIdentifier: 
   cardTitle: Pikeman
-  cardDescription: Man with the spear
+  cardDescription: 
   cardFaction: Holy Roman Empire
   cost: 3
   health: 4

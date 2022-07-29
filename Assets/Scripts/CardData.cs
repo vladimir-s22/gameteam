@@ -15,6 +15,12 @@ public class CardData : ScriptableObject
     public int numberInDeck;
 
     public Sprite cardImage;
+    
     public bool isSpell = false;
+    public string spellType = "";
+
     public bool isRanged = false;
+
+    public int thorns = 0;
+    public int armour = 0;
 }

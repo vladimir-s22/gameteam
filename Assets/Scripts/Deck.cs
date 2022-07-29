@@ -55,14 +55,40 @@ public class Deck
 
     private Card createNewCard(GameObject cardArea)
     {
-        GameObject newCard = GameObject.Instantiate(GameController.instance.cardPrefab,
+        CardData newCardData;
+        GameObject cardPrefab;
+
+        newCardData = RandomCard();
+
+        if (newCardData.isSpell)
+        {
+            if (faction == "roman")
+            {
+                cardPrefab = GameController.instance.romanSpellPrefab;        
+            } else
+            {
+                cardPrefab = GameController.instance.eldritchSpellPrefab;
+            }
+        } else
+        {
+            if (faction == "roman")
+            {
+                cardPrefab = GameController.instance.romanUnitPrefab;
+            }
+            else
+            {
+                cardPrefab = GameController.instance.eldritchUnitPrefab;
+            }
+        }
+
+        GameObject newCard = GameObject.Instantiate(cardPrefab,
                                                     GameController.instance.canvas.gameObject.transform);
         newCard.transform.SetParent(cardArea.transform, false);
         Card card = newCard.GetComponent<Card>();
 
         if (card)
         {
-            card.cardData = RandomCard();
+            card.cardData = newCardData;
             card.isDraggable = false;
             card.initialize();
             
