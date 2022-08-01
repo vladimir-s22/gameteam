@@ -1000,12 +1000,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89da29322b0fc3741895a109b8c747f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  generalImage: {fileID: 266163848}
-  generalActiveEffect: {fileID: 1194178909}
-  general: {fileID: 496868251}
-  generalHealth: {fileID: 1059545779}
-  hand:
-    cardArea: {fileID: 757077647}
+  GeneralImage: {fileID: 0}
+  PlayerHealth: {fileID: 0}
+  PlayerHand:
+    cardArea: {fileID: 0}
     cards:
     - {fileID: 0}
     - {fileID: 0}
@@ -1018,15 +1016,13 @@ MonoBehaviour:
     - 
     - 
     - 
-  board:
-    boardArea: {fileID: 345341808}
-    cards:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-  essence: 5
+  PlayerBoard:
+    boardArea: {fileID: 0}
+    cards: []
+  PlayerDeck:
+    cardDatas: []
+    faction: 
+  PlayerName: 
 --- !u!1 &706839414
 GameObject:
   m_ObjectHideFlags: 0
@@ -2199,7 +2195,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1506692631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2623,6 +2619,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1744064346}
   - component: {fileID: 1744064347}
+  - component: {fileID: 1744064349}
+  - component: {fileID: 1744064348}
+  - component: {fileID: 1744064350}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -2657,54 +2656,128 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 893eb545881c8b444968fa54129ee560, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerADeck:
-    cardDatas: []
-    faction: roman
-  playerAcardsInDeck: {fileID: 2089937145}
-  playerBDeck:
-    cardDatas: []
-    faction: eldritch
-  playerBcardsInDeck: {fileID: 1176008265}
-  playerAHand:
-    cardArea: {fileID: 757077647}
-    cards:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    animNames:
-    - CardIdle
-    - CardFlip
-    - CardFaceDown
-  playerBHand:
-    cardArea: {fileID: 1126125839}
-    cards:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    animNames:
-    - CardIdle
-    - CardFlip
-    - CardFaceDown
-  playerABoard:
-    boardArea: {fileID: 345341808}
-    cards: []
-  playerBBoard:
-    boardArea: {fileID: 1872034815}
-    cards: []
   playerA: {fileID: 526089648}
   playerB: {fileID: 2033001786}
-  activePlayer: {fileID: 0}
   canvas: {fileID: 1418501039}
-  turnNumber: 1
-  romanCards:
+  playedCard: {fileID: 0}
+  endTurnButton: {fileID: 1506692630}
+--- !u!114 &1744064348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1744064345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ecdb5b88c75f2c4d84effe917c11932, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealthNumbers:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  DamageNumbers:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  RedGlowNumbers:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  CostNumbers:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!114 &1744064349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1744064345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e99522bb03832d4294f71d28db4b0aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _activePlayer: {fileID: 0}
+  _inActivePlayer: {fileID: 0}
+  _turnNumber: 1
+--- !u!114 &1744064350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1744064345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fec48b8a0cdbc214182a27a34abe70ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RomanCards:
   - {fileID: 11400000, guid: 5ace67e993cfc524ebd7c0b9df157ac2, type: 2}
   - {fileID: 11400000, guid: 1553639c407fad245a8eca09c3557892, type: 2}
   - {fileID: 11400000, guid: 7e054840431fd7a4b93e7fa5fc82aad8, type: 2}
@@ -2712,17 +2785,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3c11b5b46e2a0a64293990678f912202, type: 2}
   - {fileID: 11400000, guid: 69434ea5e1210f44db1694433c5accbd, type: 2}
   - {fileID: 11400000, guid: f7de9623c5f3b5c4cb7f93f4f895800a, type: 2}
+  - {fileID: 11400000, guid: 78779d80baf0b3e469d685bb1ff487b4, type: 2}
   - {fileID: 11400000, guid: b0452c76cf9168446b0219e1dc423fc2, type: 2}
   - {fileID: 11400000, guid: 32b6865343b88c34c92ebc913e08f5cc, type: 2}
   - {fileID: 11400000, guid: e4122ae01238dcc49a168479724d05b2, type: 2}
   - {fileID: 11400000, guid: e570d8a7b457f5c4284a8840da05fcc3, type: 2}
-  - {fileID: 11400000, guid: 78779d80baf0b3e469d685bb1ff487b4, type: 2}
   - {fileID: 11400000, guid: 9663a69333645634cb6365601b6efdd3, type: 2}
   - {fileID: 11400000, guid: 193a3b5a7da7534499d2f60b579fa31e, type: 2}
   - {fileID: 11400000, guid: aa1c00d04bc7efa4b955e253be134429, type: 2}
   - {fileID: 11400000, guid: ba0c6637aa19bf54aa1c965058082b3f, type: 2}
   - {fileID: 11400000, guid: 258f77b66efda4f4fa561492085544fc, type: 2}
-  eldritchCards:
+  EldritchCards:
   - {fileID: 11400000, guid: 144d19b49a531fa40b86adb14bf37f24, type: 2}
   - {fileID: 11400000, guid: 7ff8022e8f3e3444580f8ce8aeb95f7a, type: 2}
   - {fileID: 11400000, guid: a4a6f8d8019955e419985a976e774ca9, type: 2}
@@ -2731,108 +2804,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d55b87458fbac3048958c6767b0b4317, type: 2}
   - {fileID: 11400000, guid: 1791c0efba44c814981ff7adca48d942, type: 2}
   - {fileID: 11400000, guid: bd858f89de064ed41a1ee6771ace115f, type: 2}
-  - {fileID: 11400000, guid: c50a049f8b5bba44aba7420104804438, type: 2}
   - {fileID: 11400000, guid: bc60be55981ef5340a300b638c73a15a, type: 2}
+  - {fileID: 11400000, guid: c50a049f8b5bba44aba7420104804438, type: 2}
   - {fileID: 11400000, guid: 7bf0f1c4b0e1c484497bb8a577ea9fbd, type: 2}
-  - {fileID: 11400000, guid: 208619f0602c5374680a540f0dd5e29b, type: 2}
   - {fileID: 11400000, guid: 9d425bf75ecc91443a22d66f5f4cc3bd, type: 2}
+  - {fileID: 11400000, guid: 208619f0602c5374680a540f0dd5e29b, type: 2}
   - {fileID: 11400000, guid: a0e3976e5d1a7654bb402f4b6b91b5f0, type: 2}
   - {fileID: 11400000, guid: 3463df7a34975fc4584a17942900a07e, type: 2}
-  essenceBalls:
-  - {fileID: 706839414}
-  - {fileID: 407184283}
-  - {fileID: 863286558}
-  - {fileID: 790316711}
-  - {fileID: 1165944064}
-  - {fileID: 1669927537}
-  - {fileID: 1931341263}
-  - {fileID: 950686908}
-  - {fileID: 25492138}
-  - {fileID: 477696155}
-  healthNumbers:
-  - {fileID: 185065824, guid: 9a33679a5c6d851438da930b57477999, type: 3}
-  - {fileID: -517092914, guid: 9a33679a5c6d851438da930b57477999, type: 3}
-  - {fileID: 1723893245, guid: 9a33679a5c6d851438da930b57477999, type: 3}
-  - {fileID: 1318943312, guid: 9a33679a5c6d851438da930b57477999, type: 3}
-  - {fileID: 46589358, guid: 9a33679a5c6d851438da930b57477999, type: 3}
-  - {fileID: -536876595, guid: 9a33679a5c6d851438da930b57477999, type: 3}
-  - {fileID: 684390003, guid: 9a33679a5c6d851438da930b57477999, type: 3}
-  - {fileID: 938631409, guid: 9a33679a5c6d851438da930b57477999, type: 3}
-  - {fileID: 31521354, guid: 9a33679a5c6d851438da930b57477999, type: 3}
-  - {fileID: -423462896, guid: 9a33679a5c6d851438da930b57477999, type: 3}
-  - {fileID: -40373261, guid: 9a33679a5c6d851438da930b57477999, type: 3}
-  - {fileID: -368392066, guid: 9a33679a5c6d851438da930b57477999, type: 3}
-  - {fileID: 1254105334, guid: 9a33679a5c6d851438da930b57477999, type: 3}
-  - {fileID: -284803172, guid: 9a33679a5c6d851438da930b57477999, type: 3}
-  - {fileID: -1144161236, guid: 9a33679a5c6d851438da930b57477999, type: 3}
-  - {fileID: -910571457, guid: 9a33679a5c6d851438da930b57477999, type: 3}
-  - {fileID: 1568649974, guid: 9a33679a5c6d851438da930b57477999, type: 3}
-  - {fileID: 906208792, guid: 9a33679a5c6d851438da930b57477999, type: 3}
-  - {fileID: -1645822681, guid: 9a33679a5c6d851438da930b57477999, type: 3}
-  - {fileID: 226766637, guid: 9a33679a5c6d851438da930b57477999, type: 3}
-  - {fileID: 1704412609, guid: 9a33679a5c6d851438da930b57477999, type: 3}
-  damageNumbers:
-  - {fileID: 185065824, guid: 9a33679a5c6d851438da930b57477999, type: 3}
-  - {fileID: -517092914, guid: 9a33679a5c6d851438da930b57477999, type: 3}
-  - {fileID: 1723893245, guid: 9a33679a5c6d851438da930b57477999, type: 3}
-  - {fileID: 1318943312, guid: 9a33679a5c6d851438da930b57477999, type: 3}
-  - {fileID: 46589358, guid: 9a33679a5c6d851438da930b57477999, type: 3}
-  - {fileID: -536876595, guid: 9a33679a5c6d851438da930b57477999, type: 3}
-  - {fileID: 684390003, guid: 9a33679a5c6d851438da930b57477999, type: 3}
-  - {fileID: 938631409, guid: 9a33679a5c6d851438da930b57477999, type: 3}
-  - {fileID: 31521354, guid: 9a33679a5c6d851438da930b57477999, type: 3}
-  - {fileID: -423462896, guid: 9a33679a5c6d851438da930b57477999, type: 3}
-  - {fileID: -40373261, guid: 9a33679a5c6d851438da930b57477999, type: 3}
-  - {fileID: -368392066, guid: 9a33679a5c6d851438da930b57477999, type: 3}
-  - {fileID: 1254105334, guid: 9a33679a5c6d851438da930b57477999, type: 3}
-  - {fileID: -284803172, guid: 9a33679a5c6d851438da930b57477999, type: 3}
-  - {fileID: -1144161236, guid: 9a33679a5c6d851438da930b57477999, type: 3}
-  - {fileID: -910571457, guid: 9a33679a5c6d851438da930b57477999, type: 3}
-  - {fileID: 1568649974, guid: 9a33679a5c6d851438da930b57477999, type: 3}
-  - {fileID: 906208792, guid: 9a33679a5c6d851438da930b57477999, type: 3}
-  - {fileID: -1645822681, guid: 9a33679a5c6d851438da930b57477999, type: 3}
-  - {fileID: 226766637, guid: 9a33679a5c6d851438da930b57477999, type: 3}
-  - {fileID: 1704412609, guid: 9a33679a5c6d851438da930b57477999, type: 3}
-  redGlowNumbers:
-  - {fileID: 2087971852, guid: 4e6129ae91318824091b1cff87abe876, type: 3}
-  - {fileID: 1145479435, guid: 4e6129ae91318824091b1cff87abe876, type: 3}
-  - {fileID: 768485118, guid: 4e6129ae91318824091b1cff87abe876, type: 3}
-  - {fileID: -737083124, guid: 4e6129ae91318824091b1cff87abe876, type: 3}
-  - {fileID: -1191573928, guid: 4e6129ae91318824091b1cff87abe876, type: 3}
-  - {fileID: -376867247, guid: 4e6129ae91318824091b1cff87abe876, type: 3}
-  - {fileID: -1810264460, guid: 4e6129ae91318824091b1cff87abe876, type: 3}
-  - {fileID: -154826728, guid: 4e6129ae91318824091b1cff87abe876, type: 3}
-  - {fileID: 679294150, guid: 4e6129ae91318824091b1cff87abe876, type: 3}
-  - {fileID: -262494950, guid: 4e6129ae91318824091b1cff87abe876, type: 3}
-  - {fileID: 1805841670, guid: 4e6129ae91318824091b1cff87abe876, type: 3}
-  - {fileID: -1446727773, guid: 4e6129ae91318824091b1cff87abe876, type: 3}
-  - {fileID: -150100043, guid: 4e6129ae91318824091b1cff87abe876, type: 3}
-  - {fileID: -1560634218, guid: 4e6129ae91318824091b1cff87abe876, type: 3}
-  - {fileID: -442036633, guid: 4e6129ae91318824091b1cff87abe876, type: 3}
-  - {fileID: -1834885606, guid: 4e6129ae91318824091b1cff87abe876, type: 3}
-  - {fileID: -1210544647, guid: 4e6129ae91318824091b1cff87abe876, type: 3}
-  - {fileID: 988849933, guid: 4e6129ae91318824091b1cff87abe876, type: 3}
-  - {fileID: -790004994, guid: 4e6129ae91318824091b1cff87abe876, type: 3}
-  - {fileID: -113710001, guid: 4e6129ae91318824091b1cff87abe876, type: 3}
-  - {fileID: 173324919, guid: 4e6129ae91318824091b1cff87abe876, type: 3}
-  costNumbers:
-  - {fileID: -112633547, guid: 7133336d01093cc489191bc69a8e86cc, type: 3}
-  - {fileID: 1119939064, guid: 7133336d01093cc489191bc69a8e86cc, type: 3}
-  - {fileID: -1268568855, guid: 7133336d01093cc489191bc69a8e86cc, type: 3}
-  - {fileID: -1715194808, guid: 7133336d01093cc489191bc69a8e86cc, type: 3}
-  - {fileID: -1917854413, guid: 7133336d01093cc489191bc69a8e86cc, type: 3}
-  - {fileID: 230502180, guid: 7133336d01093cc489191bc69a8e86cc, type: 3}
-  - {fileID: 1930334321, guid: 7133336d01093cc489191bc69a8e86cc, type: 3}
-  - {fileID: -2086357104, guid: 7133336d01093cc489191bc69a8e86cc, type: 3}
-  - {fileID: -1621690027, guid: 7133336d01093cc489191bc69a8e86cc, type: 3}
-  - {fileID: -158884294, guid: 7133336d01093cc489191bc69a8e86cc, type: 3}
-  cardPrefab: {fileID: 3237839534594509041, guid: a4284c962d7151e4695b5a761296a1ed, type: 3}
-  eldritchUnitPrefab: {fileID: 3237839534594509041, guid: 4541bca8f99e90c4d920b7b1b75eb97a, type: 3}
-  eldritchSpellPrefab: {fileID: 3237839534594509041, guid: a7ee62b2451a047468b75ec60d381818, type: 3}
-  romanUnitPrefab: {fileID: 3237839534594509041, guid: 13f6d240ce8149441adc303c3f76925e, type: 3}
-  romanSpellPrefab: {fileID: 3237839534594509041, guid: e57dde5a5a8f96347ad06bb973d49d67, type: 3}
-  playedCard: {fileID: 0}
-  endTurnButton: {fileID: 1506692630}
+  EldritchUnitPrefab: {fileID: 3237839534594509041, guid: 4541bca8f99e90c4d920b7b1b75eb97a, type: 3}
+  EldritchSpellPrefab: {fileID: 3237839534594509041, guid: a7ee62b2451a047468b75ec60d381818, type: 3}
+  RomanUnitPrefab: {fileID: 3237839534594509041, guid: 13f6d240ce8149441adc303c3f76925e, type: 3}
+  RomanSpellPrefab: {fileID: 3237839534594509041, guid: e57dde5a5a8f96347ad06bb973d49d67, type: 3}
 --- !u!1 &1745050255
 GameObject:
   m_ObjectHideFlags: 0
@@ -3182,9 +3164,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1744064347}
-        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
-        m_MethodName: endTurn
+      - m_Target: {fileID: 1744064349}
+        m_TargetAssemblyTypeName: PlayerSwitcher, Assembly-CSharp
+        m_MethodName: SwitchPlayers
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3285,12 +3267,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89da29322b0fc3741895a109b8c747f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  generalImage: {fileID: 0}
-  generalActiveEffect: {fileID: 401439056}
-  general: {fileID: 734935784}
-  generalHealth: {fileID: 471711963}
-  hand:
-    cardArea: {fileID: 1126125839}
+  GeneralImage: {fileID: 0}
+  PlayerHealth: {fileID: 0}
+  PlayerHand:
+    cardArea: {fileID: 0}
     cards:
     - {fileID: 0}
     - {fileID: 0}
@@ -3303,15 +3283,13 @@ MonoBehaviour:
     - 
     - 
     - 
-  board:
-    boardArea: {fileID: 1872034815}
-    cards:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-  essence: 5
+  PlayerBoard:
+    boardArea: {fileID: 0}
+    cards: []
+  PlayerDeck:
+    cardDatas: []
+    faction: 
+  PlayerName: 
 --- !u!1 &2089937143
 GameObject:
   m_ObjectHideFlags: 0

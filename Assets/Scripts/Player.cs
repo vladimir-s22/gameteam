@@ -5,11 +5,44 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 { 
-    public Image generalImage = null;
-    public GameObject generalActiveEffect = null;
-    public GameObject general;
-    public Image generalHealth = null;
-    public Hand hand = null;
-    public Board board = null;
-    public int essence = 1;
+    public Image GeneralImage;
+    public Image PlayerHealth;
+
+    public Hand PlayerHand = new Hand();
+    public Board PlayerBoard = new Board();
+    public Deck PlayerDeck = new Deck();
+
+    public string PlayerName;
+
+    private int _essence = 1;
+
+    public void IncrementEssence()
+    {
+        _essence++;
+    }
+
+    public void DecrementEssence()
+    {
+        _essence--;
+    }
+
+    public int GetEssence()
+    {
+        return _essence;
+    }
+
+    public Hand GetHand()
+    {
+        return PlayerHand;
+    }
+
+    public Board GetBoard()
+    {
+        return PlayerBoard;
+    }
+
+    public Deck GetPlayerDeck()
+    {
+        return PlayerDeck;
+    }
 }
