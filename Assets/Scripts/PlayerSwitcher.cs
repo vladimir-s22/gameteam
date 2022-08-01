@@ -4,20 +4,22 @@ public class PlayerSwitcher : MonoBehaviour
 {
     public static PlayerSwitcher instance;
 
-    [SerializeField] public Player _activePlayer;
-    [SerializeField] public Player _inActivePlayer;
+    [SerializeField] Player _activePlayer;
+    [SerializeField] Player _inActivePlayer;
     public int _turnNumber = 1;
 
-    private void Start()
+    private void Awake()
     {
-        _activePlayer = new Player();
-        _inActivePlayer = new Player();
+        if (instance != null && instance != this)
+        { Destroy(this); }
+        else
+        { instance = this; }
     }
 
     public void SwitchPlayers()
     {
-        // Debug.Log("[PlayerSwitcher::SwitchPlayers] Current active player is " + _activePlayer);
-        // Debug.Log("[PlayerSwitcher::SwitchPlayers] Current inactive player is " + _inActivePlayer);
+        // Debug.Log("[PlayerSwitcher::SwitchPlayers] Active player has " + _activePlayer.GetEssence() + " essence");
+        // Debug.Log("[PlayerSwitcher::SwitchPlayers] Inactive player is " + _inActivePlayer.GetEssence() + " essence");
         Player tempPlayer;
         tempPlayer = _activePlayer;
 

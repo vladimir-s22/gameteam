@@ -4,17 +4,21 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour
-{ 
-    public Image GeneralImage;
-    public Image PlayerHealth;
+{
+    private Hand _hand;
+    private Board _board;
+    private General _general;
 
-    public Hand PlayerHand = new Hand();
-    public Board PlayerBoard = new Board();
-    public Deck PlayerDeck = new Deck();
-
-    public string PlayerName;
+    private Deck _deck = new Deck();
 
     private int _essence = 1;
+
+    private void Awake()
+    {
+        _hand = gameObject.GetComponentInChildren<Hand>();
+        _board = gameObject.GetComponentInChildren<Board>();
+        _general = gameObject.GetComponentInChildren<General>();
+    }
 
     public void IncrementEssence()
     {
@@ -33,16 +37,17 @@ public class Player : MonoBehaviour
 
     public Hand GetHand()
     {
-        return PlayerHand;
+        return _hand;
     }
 
     public Board GetBoard()
     {
-        return PlayerBoard;
+        return _board;
     }
 
-    public Deck GetPlayerDeck()
+    public General GetGeneral()
     {
-        return PlayerDeck;
+        return _general;
     }
+
 }

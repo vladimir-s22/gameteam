@@ -8,6 +8,14 @@ public class EssenceController : MonoBehaviour
 
     [SerializeField] public List<GameObject> EssenceCrystals;
 
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        { Destroy(this); }
+        else
+        { instance = this; }
+    }
+
     public void UpdateEssence()
     {
         for (int m = 0; m < 10; m++)
@@ -21,7 +29,6 @@ public class EssenceController : MonoBehaviour
             }
         }
 
-        // Debug.Log("[EssenceController::updateEssence] Essence updated. Active player is " + activePlayer + " and his essence is " + activePlayer.essence);
+        // Debug.Log("[EssenceController::UpdateEssence] Essence updated. Active player is " + PlayerSwitcher.instance.GetActivePlayer() + " and his essence is " + PlayerSwitcher.instance.GetActivePlayer().GetEssence());
     }
-
 }

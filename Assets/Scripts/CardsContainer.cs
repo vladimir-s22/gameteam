@@ -4,14 +4,22 @@ using UnityEngine;
 
 public class CardsContainer : MonoBehaviour
 {
-    public static CardsContainer instance;
+    public static CardsContainer instance { get; private set;}
 
-    [SerializeField] public List<CardData> RomanCards = new List<CardData>();
-    [SerializeField] public List<CardData> EldritchCards = new List<CardData>();
+    [SerializeField] private List<CardData> RomanCards = new List<CardData>();
+    [SerializeField] private List<CardData> EldritchCards = new List<CardData>();
 
-    [SerializeField] public GameObject EldritchUnitPrefab;
-    [SerializeField] public GameObject EldritchSpellPrefab;
+    [SerializeField] private GameObject EldritchUnitPrefab;
+    [SerializeField] private GameObject EldritchSpellPrefab;
 
-    [SerializeField] public GameObject RomanUnitPrefab;
-    [SerializeField] public GameObject RomanSpellPrefab;
+    [SerializeField] private GameObject RomanUnitPrefab;
+    [SerializeField] private GameObject RomanSpellPrefab;
+
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        { Destroy(this); }
+        else
+        { instance = this; }
+    }
 }

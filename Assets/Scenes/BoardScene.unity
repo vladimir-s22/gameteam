@@ -859,10 +859,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44c27db2c6185c74a8f0688d57c1696f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 20
-  healthImage: {fileID: 1059545779}
+  HealthImage: {fileID: 1059545779}
+  GeneralImage: {fileID: 266163848}
   winScreen: {fileID: 1083669036}
   winBanner: {fileID: 1614323953}
+  _health: 20
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -958,7 +959,7 @@ GameObject:
   - component: {fileID: 526089647}
   - component: {fileID: 526089648}
   m_Layer: 5
-  m_Name: PlayerAArea
+  m_Name: PlayerA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1000,29 +1001,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89da29322b0fc3741895a109b8c747f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GeneralImage: {fileID: 0}
-  PlayerHealth: {fileID: 0}
-  PlayerHand:
-    cardArea: {fileID: 0}
-    cards:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    animNames:
-    - 
-    - 
-    - 
-  PlayerBoard:
-    boardArea: {fileID: 0}
-    cards: []
-  PlayerDeck:
-    cardDatas: []
-    faction: 
-  PlayerName: 
 --- !u!1 &706839414
 GameObject:
   m_ObjectHideFlags: 0
@@ -1151,10 +1129,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44c27db2c6185c74a8f0688d57c1696f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 20
-  healthImage: {fileID: 471711963}
+  HealthImage: {fileID: 471711963}
+  GeneralImage: {fileID: 1653181943}
   winScreen: {fileID: 1083669036}
   winBanner: {fileID: 1745050255}
+  _health: 20
 --- !u!1 &757077647
 GameObject:
   m_ObjectHideFlags: 0
@@ -1165,6 +1144,7 @@ GameObject:
   m_Component:
   - component: {fileID: 757077648}
   - component: {fileID: 757077649}
+  - component: {fileID: 757077650}
   m_Layer: 5
   m_Name: CardArea
   m_TagString: Untagged
@@ -1216,6 +1196,30 @@ MonoBehaviour:
   m_Spacing: {x: 20, y: 0}
   m_Constraint: 2
   m_ConstraintCount: 1
+--- !u!114 &757077650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 757077647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8547f16f5890c64ca8f93ddb623c99c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cards:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _animNames:
+  - 
+  - 
+  - 
 --- !u!1 &790316711
 GameObject:
   m_ObjectHideFlags: 0
@@ -1722,6 +1726,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1126125840}
   - component: {fileID: 1126125841}
+  - component: {fileID: 1126125842}
   m_Layer: 5
   m_Name: CardArea
   m_TagString: Untagged
@@ -1773,6 +1778,30 @@ MonoBehaviour:
   m_Spacing: {x: 20, y: 0}
   m_Constraint: 2
   m_ConstraintCount: 1
+--- !u!114 &1126125842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1126125839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8547f16f5890c64ca8f93ddb623c99c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cards:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _animNames:
+  - 
+  - 
+  - 
 --- !u!1 &1149162155
 GameObject:
   m_ObjectHideFlags: 0
@@ -2618,10 +2647,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1744064346}
-  - component: {fileID: 1744064347}
-  - component: {fileID: 1744064349}
   - component: {fileID: 1744064348}
   - component: {fileID: 1744064350}
+  - component: {fileID: 1744064352}
+  - component: {fileID: 1744064351}
+  - component: {fileID: 1744064347}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -2656,11 +2686,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 893eb545881c8b444968fa54129ee560, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerA: {fileID: 526089648}
-  playerB: {fileID: 2033001786}
   canvas: {fileID: 1418501039}
-  playedCard: {fileID: 0}
-  endTurnButton: {fileID: 1506692630}
+  PlayedCard: {fileID: 0}
 --- !u!114 &1744064348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2674,27 +2701,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HealthNumbers:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 2087971852, guid: 4e6129ae91318824091b1cff87abe876, type: 3}
+  - {fileID: 1145479435, guid: 4e6129ae91318824091b1cff87abe876, type: 3}
+  - {fileID: 768485118, guid: 4e6129ae91318824091b1cff87abe876, type: 3}
+  - {fileID: -737083124, guid: 4e6129ae91318824091b1cff87abe876, type: 3}
+  - {fileID: -1191573928, guid: 4e6129ae91318824091b1cff87abe876, type: 3}
+  - {fileID: -376867247, guid: 4e6129ae91318824091b1cff87abe876, type: 3}
+  - {fileID: -1810264460, guid: 4e6129ae91318824091b1cff87abe876, type: 3}
+  - {fileID: -154826728, guid: 4e6129ae91318824091b1cff87abe876, type: 3}
+  - {fileID: 679294150, guid: 4e6129ae91318824091b1cff87abe876, type: 3}
+  - {fileID: -262494950, guid: 4e6129ae91318824091b1cff87abe876, type: 3}
+  - {fileID: 1805841670, guid: 4e6129ae91318824091b1cff87abe876, type: 3}
+  - {fileID: -1446727773, guid: 4e6129ae91318824091b1cff87abe876, type: 3}
+  - {fileID: -150100043, guid: 4e6129ae91318824091b1cff87abe876, type: 3}
+  - {fileID: -1560634218, guid: 4e6129ae91318824091b1cff87abe876, type: 3}
+  - {fileID: -442036633, guid: 4e6129ae91318824091b1cff87abe876, type: 3}
+  - {fileID: -1834885606, guid: 4e6129ae91318824091b1cff87abe876, type: 3}
+  - {fileID: -1210544647, guid: 4e6129ae91318824091b1cff87abe876, type: 3}
+  - {fileID: 988849933, guid: 4e6129ae91318824091b1cff87abe876, type: 3}
+  - {fileID: -790004994, guid: 4e6129ae91318824091b1cff87abe876, type: 3}
+  - {fileID: -113710001, guid: 4e6129ae91318824091b1cff87abe876, type: 3}
+  - {fileID: 173324919, guid: 4e6129ae91318824091b1cff87abe876, type: 3}
   DamageNumbers:
   - {fileID: 0}
   - {fileID: 0}
@@ -2750,21 +2777,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
---- !u!114 &1744064349
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1744064345}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e99522bb03832d4294f71d28db4b0aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _activePlayer: {fileID: 0}
-  _inActivePlayer: {fileID: 0}
-  _turnNumber: 1
 --- !u!114 &1744064350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2815,6 +2827,44 @@ MonoBehaviour:
   EldritchSpellPrefab: {fileID: 3237839534594509041, guid: a7ee62b2451a047468b75ec60d381818, type: 3}
   RomanUnitPrefab: {fileID: 3237839534594509041, guid: 13f6d240ce8149441adc303c3f76925e, type: 3}
   RomanSpellPrefab: {fileID: 3237839534594509041, guid: e57dde5a5a8f96347ad06bb973d49d67, type: 3}
+--- !u!114 &1744064351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1744064345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e99522bb03832d4294f71d28db4b0aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _activePlayer: {fileID: 526089648}
+  _inActivePlayer: {fileID: 2033001786}
+  _turnNumber: 1
+--- !u!114 &1744064352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1744064345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0635ae1298c76f74ca777469ee153169, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EssenceCrystals:
+  - {fileID: 706839414}
+  - {fileID: 407184283}
+  - {fileID: 863286558}
+  - {fileID: 790316711}
+  - {fileID: 1165944064}
+  - {fileID: 1669927537}
+  - {fileID: 1931341263}
+  - {fileID: 950686908}
+  - {fileID: 25492138}
+  - {fileID: 477696155}
 --- !u!1 &1745050255
 GameObject:
   m_ObjectHideFlags: 0
@@ -3164,7 +3214,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1744064349}
+      - m_Target: {fileID: 1744064351}
         m_TargetAssemblyTypeName: PlayerSwitcher, Assembly-CSharp
         m_MethodName: SwitchPlayers
         m_Mode: 1
@@ -3225,7 +3275,7 @@ GameObject:
   - component: {fileID: 2033001785}
   - component: {fileID: 2033001786}
   m_Layer: 5
-  m_Name: PlayerBArea
+  m_Name: PlayerB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3267,29 +3317,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89da29322b0fc3741895a109b8c747f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GeneralImage: {fileID: 0}
-  PlayerHealth: {fileID: 0}
-  PlayerHand:
-    cardArea: {fileID: 0}
-    cards:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    animNames:
-    - 
-    - 
-    - 
-  PlayerBoard:
-    boardArea: {fileID: 0}
-    cards: []
-  PlayerDeck:
-    cardDatas: []
-    faction: 
-  PlayerName: 
 --- !u!1 &2089937143
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class Board
+public class Board : MonoBehaviour
 {
-    public GameObject boardArea = null;
     public List<Card> cards;
 
     // public void addCard(Card card, Board board)

@@ -6,22 +6,20 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-    static public GameController instance;
+    public static GameController instance { get; private set; }
 
-    public Player playerA;
-    public Player playerB;
+    [SerializeField] GameObject canvas;
+    [SerializeField] Card PlayedCard;
 
-    public GameObject canvas;
-    public Card playedCard;
+    void Awake()
+    {
+        if (instance != null && instance != this)
+        { Destroy(this); }
+        else
+        { instance = this; }
 
-    public GameObject endTurnButton;
-
-    // void Awake()
-    // {
-    //     public Player playerA = PlayerSwitcher.instance.GetActivePlayer();
-    //     public Player playerB = PlayerSwitcher.instance.GetInActivePlayer();
-        // instance = this;
-        // activePlayer = playerA;
+        EssenceController.instance.UpdateEssence();
+        Debug.Log(PlayerSwitcher.instance.GetActivePlayer().GetHand());
         // playerA.generalActiveEffect.SetActive(true);
 
         // playerA.essence = GameController.instance.turnNumber;
@@ -36,7 +34,7 @@ public class GameController : MonoBehaviour
         // Debug.Log("[Controller::Awake] Active player is " + activePlayer);
         // Debug.Log("[Controller::Awake] Active player essence is " + activePlayer.essence);
         // Debug.Log("[Controller::Awake] Turn number is " + turnNumber);
-    // }
+    }
     // Start is called before the first frame update
     // void Start()
     // {
@@ -147,4 +145,9 @@ public class GameController : MonoBehaviour
         // GameController.instance.activePlayer.hand.deactivateCards();
         // endTurnButton.SetActive(false);
     // }
+
+    public Card GetPlayedCard()
+    {
+        return PlayedCard;
+    }
 }

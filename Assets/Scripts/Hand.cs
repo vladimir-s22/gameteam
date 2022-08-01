@@ -1,13 +1,9 @@
 using UnityEngine;
 
-[System.Serializable]
-public class Hand
+public class Hand : MonoBehaviour
 {
-    public GameObject cardArea;
-
-    public Card[] cards = new Card[7];
-    
-    public string[] animNames = new string[3];
+    [SerializeField] private Card[] _cards = new Card[7];
+    [SerializeField] private string[] _animNames = new string[3];
     
     // public void activateCards()
     // {
