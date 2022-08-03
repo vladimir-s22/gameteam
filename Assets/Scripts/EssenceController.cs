@@ -10,10 +10,7 @@ public class EssenceController : MonoBehaviour
 
     private void Awake()
     {
-        if (instance != null && instance != this)
-        { Destroy(this); }
-        else
-        { instance = this; }
+        instance = this;
     }
 
     public void UpdateEssence()
@@ -28,7 +25,5 @@ public class EssenceController : MonoBehaviour
                 EssenceCrystals[m].SetActive(false);
             }
         }
-
-        // Debug.Log("[EssenceController::UpdateEssence] Essence updated. Active player is " + PlayerSwitcher.instance.GetActivePlayer() + " and his essence is " + PlayerSwitcher.instance.GetActivePlayer().GetEssence());
     }
 }

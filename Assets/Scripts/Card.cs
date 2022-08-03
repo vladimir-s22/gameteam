@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Card : MonoBehaviour//, IPointerDownHandler
+public class Card : MonoBehaviour, IPointerDownHandler
 {
     public CardData cardData;
 
@@ -81,135 +81,89 @@ public class Card : MonoBehaviour//, IPointerDownHandler
         updateCardVisual();
     }
 
-    public void AllowDrag()
+    public bool CanPlay()
     {
-        isDraggable = true;
+        if (cardCost <= PlayerSwitcher.instance.GetActivePlayer().GetEssence())
+        {
+            return true;
+        } else
+        {
+            return false;
+        }
     }
-    // public void OnPointerDown(PointerEventData eventData)
-    // {
-    //     Card card = GetComponent<Card>();
-    //     Card playedCard = GameController.instance.playedCard;
 
+    public void copyCard(Board cardArea)
+    {
+        GameObject newCard = GameObject.Instantiate(CardsContainer.instance.GetPrefab(cardData), cardArea.transform);
+        Card card = newCard.GetComponent<Card>();
 
-    //     if (GameController.instance.playedCard == null)
-    //     {
-    //         if (card.isActive)
-    //         {
-    //             GameController.instance.playedCard = card;
-    //             card.isActive = false;
-    //             card.activeEffect.SetActive(false);
-    //             card.playedEffect.SetActive(true);
-    //         }
-    //     } else
-    //     {
-    //         if (playedCard.cardData.isSpell)
-    //         {
-    //             playedCard.castSpell(card);
-    //             GameObject.Destroy(playedCard.gameObject);
-    //         }
+        card.cardData = cardData;
+        card.isDraggable = false;
+        card.initialize();
+        cardArea.cards.Add(card);
 
-    //         if (card.transform.parent.name == "DropZone")
-    //         {
-    //             card.dealDamage(playedCard.cardDamage - card.armour);
+        PlayerSwitcher.instance.GetActivePlayer().GetHand().Cards.Remove(gameObject.GetComponent<Card>());
+        GameObject.Destroy(gameObject);
+    }
 
-    //             Debug.Log("[Card::onPointerDown::backDamageCheck] Target card has thorns: " + card.thorns);
-    //             playedCard.dealDamage(card.thorns);
+    public void PlayCard() 
+    {
+        if (CanPlay())
+        {
+            PlayerSwitcher.instance.GetActivePlayer().SpendEssence(GetComponent<Card>().cardCost);
+        }
+    }
 
-    //             if (!playedCard.cardData.isRanged)
-    //             {
-    //                 if (card.cardData.isRanged)
-    //                 {
-    //                     Debug.Log("[Card::onPointerDown::backDamageCheck] Target card is ranged: " + card.cardData.isRanged);
-    //                     playedCard.dealDamage(0);
-    //                 } else
-    //                 {
-    //                     Debug.Log("[Card::onPointerDown::backDamageCheck] Target card is ranged: " + card.cardData.isRanged);
-    //                     playedCard.dealDamage(card.cardDamage - card.armour);
-    //                 }
-    //             }
+    public void Activate(bool enable)
+    {
+        activeEffect.SetActive(enable);
+        isActive = enable;
 
-    //             playedCard.playedEffect.SetActive(false);
-    //             GameController.instance.playedCard = null;
-    //         }
-    //     }
-    // }
+        if (!enable)
+        {
+            playedEffect.SetActive(enable);
+        }
+    }
 
-    // public void castSpell(Card card)
-    // {
-    //     Card playedCard = GameController.instance.playedCard;
-    //     if (playedCard.cardData.spellType == "thorn")
-    //     {
-    //         card.thorns += 1;
-    //     }
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        Card playedCard = GameController.instance.PlayedCard;
 
-    //     if (playedCard.cardData.spellType == "rejuvenate")
-    //     {
-    //         foreach (Card iterateCard in GameController.instance.activePlayer.board.cards)
-    //         {
-    //             Debug.Log("[Card::CastSpell::Rejuvenate] Iteratable card is " + iterateCard.cardData.cardTitle);
-    //             iterateCard.dealDamage(playedCard.cardData.damage);
-    //             Debug.Log("[Card::CastSpell::Rejuvenate] Iteratable card has " + iterateCard.cardHealth + " HP");
-    //             Debug.Log("[Card::CastSpell::Rejuvenate] Played card deals " + playedCard.cardData.damage);
-    //             iterateCard.health.sprite = GameController.instance.healthNumbers[iterateCard.cardHealth];
-    //         }
-    //         GameController.instance.activePlayer.general.GetComponent<General>().getDamage(playedCard.cardData.damage);
-    //         GameController.instance.activePlayer.general.GetComponent<General>().healthImage.sprite = GameController.instance.redGlowNumbers[GameController.instance.activePlayer.general.GetComponent<General>().health];
-    //     }
+        if (playedCard)
+        {
+            if (transform.parent.name == "DropZone")
+            {
+                dealDamage(playedCard.cardDamage - armour);
 
-    //     if (playedCard.cardData.spellType == "root")
-    //     {
-    //         Board inActivePlayerBoard = getInactivePlayer().board;
-    //         if (playedCard.cardData.health == 0)
-    //         {
-    //             card.dealDamage(playedCard.cardData.damage);
-    //             Debug.Log("[Card::castSpell::root] Dealing single damage " + playedCard.cardData.damage);
-    //             card.isRooted = true;
-    //         } else
-    //         {
-    //             Board nonActivePlayerBoard = getInactivePlayer().board;
-    //             Debug.Log("[Card::castSpell::root] Dealing board damage " + playedCard.cardData.damage);
-    //             foreach(Card iterateCard in nonActivePlayerBoard.cards)
-    //             {
-    //                 iterateCard.dealDamage(playedCard.cardData.damage);
-    //                 iterateCard.isRooted = true;
-    //             }
-    //         }
-    //     }
+                playedCard.dealDamage(thorns);
 
-    //     if (playedCard.cardData.spellType == "draw")
-    //     {
-    //         // Hand activeHand = GameController.instance.activePlayer.hand;
-    //         Debug.Log("[Card::castSpell::Draw] It's a draw card");
-    //         // Deck activeDeck;
-    //         // if (GameController.instance.activePlayer == GameController.instance.playerA)
-    //         // {
-    //         //     activeDeck = GameController.instance.playerADeck;
-    //         // } else
-    //         // {
-    //         //     activeDeck = GameController.instance.playerBDeck;
-    //         // }
+                if (!playedCard.cardData.isRanged)
+                {
+                    if (cardData.isRanged)
+                    {
+                        playedCard.dealDamage(0);
+                    } else
+                    {
+                        playedCard.dealDamage(cardDamage - armour);
+                    }
+                }
+            }
 
-    //         // for (int i = 0; i < playedCard.cardData.health; i++)
-    //         // {
-    //         //    activeDeck.dealCard(activeHand);
-    //         // }
-    //     }
+            playedCard.playedEffect.SetActive(false);
+            GameController.instance.PlayedCard = null;
+        } else
+        {
+            if (isActive)
+            {
+                GameController.instance.PlayedCard = this;
+                Activate(false);
+                playedEffect.SetActive(true);
+            }
+        }
+    }
 
-    //     if (playedCard.cardData.spellType == "damage")
-    //     {
-    //         card.dealDamage(playedCard.cardData.damage);
-    //     }
-    // }
-
-    // public Player getInactivePlayer()
-    // {
-    //     Player activePlayer = GameController.instance.activePlayer.GetComponent<Player>();
-    //     if (activePlayer == GameController.instance.playerA.GetComponent<Player>())
-    //     {
-    //         return GameController.instance.playerB.GetComponent<Player>();
-    //     } else
-    //     {
-    //         return GameController.instance.playerA.GetComponent<Player>();
-    //     }
-    // }
+    public int GetDamage()
+    {
+        return cardDamage;
+    }
 }

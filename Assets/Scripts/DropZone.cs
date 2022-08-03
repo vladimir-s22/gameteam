@@ -7,30 +7,23 @@ public class DropZone : MonoBehaviour, IDropHandler
 {
     public void OnDrop(PointerEventData eventData)
     {
-        // GameObject dragObject = eventData.pointerDrag;
-        // Card card = dragObject.GetComponent<Card>();
-        // Board targetBoard = GameController.instance.activePlayer.board;
-        // Hand sourceHand = GameController.instance.activePlayer.hand;
+        GameObject dragObject = eventData.pointerDrag;
+        Card card = dragObject.GetComponent<Card>();
+        Board activePlayerBoard = PlayerSwitcher.instance.GetActivePlayer().GetBoard();
+        Hand activePlayerHand = PlayerSwitcher.instance.GetActivePlayer().GetHand();
 
-        // Debug.Log("[DropZone::onDrop] Drop zone has cards " + targetBoard.cards.Count);
-        // if (GameController.instance.activePlayer.essence >= card.cardData.cost && card.isDraggable == true)
-        // {
-        //     card.isDraggable = false;
-        //     if (!card.cardData.isSpell)
-        //     {
-        //         sourceHand.moveCardtoDropZone(card, targetBoard);
-        //     } else
-        //     {
-        //         GameController.instance.playedCard = card;
-        //         card.gameObject.SetActive(false);
-        //     }
-
-            
-        //     GameController.instance.activePlayer.essence -= card.cardData.cost;
-        //     GameController.instance.updateEssence();
-        // }
-
-        // Debug.Log("[DropZone::onDrop] Active player is " + GameController.instance.activePlayer);
-        // Debug.Log("[DropZone::onDrop] Active player essence is " + GameController.instance.activePlayer.essence);
+        if (card.CanPlay() && card.isDraggable)
+        {
+            card.isDraggable = false;
+            if (card.cardData.isSpell)
+            {
+                GameController.instance.PlayedCard = card;
+                card.gameObject.SetActive(false);
+            } else
+            {
+                card.copyCard(GetComponent<Board>());
+            }
+            card.PlayCard();
+        }
     }
 }

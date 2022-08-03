@@ -62,6 +62,7 @@ public class Deck
             card.cardData = newCardData;
             card.isDraggable = false;
             card.initialize();
+            Hand.GetComponent<Hand>().Cards.Add(card);
             
             return card;
         } else
@@ -71,15 +72,11 @@ public class Deck
         }
     }
 
-    internal void dealCard(Hand hand)
+    internal void dealCard(GameObject Hand)
     {
-        for (int i = 0; i < 7; i++)
+        if (Hand.GetComponent<Hand>().Cards.Count < 7)
         {
-            if (hand.Cards[i] == null)
-            {
-                hand.Cards[i] = createNewCard(hand.gameObject);
-                return;
-            }
+            createNewCard(Hand);
         }
     }
 }

@@ -6,7 +6,8 @@ public class PlayerSwitcher : MonoBehaviour
 
     [SerializeField] Player _activePlayer;
     [SerializeField] Player _inActivePlayer;
-    public int _turnNumber = 1;
+    private int _initialEssence = 1;
+    public int TurnNumber = 1;
 
     private void Awake()
     {
@@ -15,7 +16,7 @@ public class PlayerSwitcher : MonoBehaviour
         else
         { instance = this; }
         _activePlayer.Initialize();
-        _activePlayer.GetHand().AllowDragCards();
+        _activePlayer.GetHand().AllowDragCards(true);
 
         _inActivePlayer.Initialize();
 
@@ -24,15 +25,22 @@ public class PlayerSwitcher : MonoBehaviour
 
     public void SwitchPlayers()
     {
-        Player tempPlayer;
-        tempPlayer = _activePlayer;
-
+        Player tempPlayer = _activePlayer;
+        _activePlayer.ReplenishEssence(_initialEssence);
         _activePlayer.IncrementEssence();
+        _activePlayer.GetHand().AllowDragCards(false);
+        _activePlayer.GetBoard().deactivateCards();
+
+        // Here player is switched
         _activePlayer = _inActivePlayer;
+
+        _activePlayer.Deck.dealCard(_activePlayer.GetHand().gameObject);
+        _activePlayer.GetBoard().activateCards();
+        _initialEssence = _activePlayer.GetEssence();
         _inActivePlayer = tempPlayer;
-        _turnNumber++;
+        TurnNumber++;
         EssenceController.instance.UpdateEssence();
-        _activePlayer.GetHand().AllowDragCards();
+        _activePlayer.GetHand().AllowDragCards(true);
         updateGeneralsActiveEffect();
     }
 
