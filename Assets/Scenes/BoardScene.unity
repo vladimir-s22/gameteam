@@ -1018,6 +1018,7 @@ MonoBehaviour:
   _hand: {fileID: 0}
   _board: {fileID: 0}
   _general: {fileID: 0}
+  _essence: 1
   Deck:
     CardDatas: []
 --- !u!1 &706839414
@@ -1227,18 +1228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8547f16f5890c64ca8f93ddb623c99c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cards:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  AnimationNames:
-  - 
-  - 
-  - 
+  Cards: []
 --- !u!1 &790316711
 GameObject:
   m_ObjectHideFlags: 0
@@ -1809,18 +1799,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8547f16f5890c64ca8f93ddb623c99c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cards:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  AnimationNames:
-  - 
-  - 
-  - 
+  Cards: []
 --- !u!1 &1149162155
 GameObject:
   m_ObjectHideFlags: 0
@@ -2860,7 +2839,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _activePlayer: {fileID: 526089648}
   _inActivePlayer: {fileID: 2033001786}
-  _turnNumber: 1
+  TurnNumber: 1
 --- !u!114 &1744064352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3353,6 +3332,7 @@ MonoBehaviour:
   _hand: {fileID: 0}
   _board: {fileID: 0}
   _general: {fileID: 0}
+  _essence: 1
   Deck:
     CardDatas: []
 --- !u!1 &2089937143
