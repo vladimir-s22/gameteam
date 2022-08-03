@@ -10,10 +10,8 @@ using UnityEngine.UI;
 
 
 public class MainMenu : MonoBehaviour {
-
-
-
-
+    
+    public AudioSource clickSoundMain;
 
 
     public void startGame() {
@@ -36,5 +34,10 @@ public class MainMenu : MonoBehaviour {
         #else
             Application.Quit();
         #endif
+    }
+
+ 
+    public void playSoundOnClick(){
+        clickSoundMain.Play();
     }
 }
