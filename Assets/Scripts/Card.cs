@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler//, IPointerDownHandler
+public class Card : MonoBehaviour//, IPointerDownHandler
 {
     public CardData cardData;
 
@@ -81,16 +81,10 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler//, 
         updateCardVisual();
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    public void AllowDrag()
     {
-        GameController.instance.PlayedCard = GetComponent<Card>();
+        isDraggable = true;
     }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        GameController.instance.PlayedCard = GetComponent<Card>();
-    }
-
     // public void OnPointerDown(PointerEventData eventData)
     // {
     //     Card card = GetComponent<Card>();

@@ -15,6 +15,8 @@ public class PlayerSwitcher : MonoBehaviour
         else
         { instance = this; }
         _activePlayer.Initialize();
+        _activePlayer.GetHand().AllowDragCards();
+
         _inActivePlayer.Initialize();
 
         _activePlayer.GetGeneral().SetActiveEffect(true);
@@ -30,6 +32,7 @@ public class PlayerSwitcher : MonoBehaviour
         _inActivePlayer = tempPlayer;
         _turnNumber++;
         EssenceController.instance.UpdateEssence();
+        _activePlayer.GetHand().AllowDragCards();
         updateGeneralsActiveEffect();
     }
 

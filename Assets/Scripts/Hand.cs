@@ -5,19 +5,16 @@ public class Hand : MonoBehaviour
     public Card[] Cards = new Card[7];
     public string[] AnimationNames = new string[3];
     
-    // public void activateCards()
-    // {
-    //     Card[] cards = this.cards;
-
-    //     for (int i = 0; i < cards.Length; i++)
-    //     {
-    //         if (cards[i] != null)
-    //         {
-    //             cards[i].isDraggable = true;
-    //             cards[i].cardBack.SetActive(false);
-    //         }
-    //     }
-    // }
+    public void AllowDragCards()
+    {
+        for (int i = 0; i < Cards.Length; i++)
+        {
+            if (Cards[i] != null)
+            {
+                Cards[i].AllowDrag();
+            }
+        }
+    }
 
     // public void deactivateCards()
     // {

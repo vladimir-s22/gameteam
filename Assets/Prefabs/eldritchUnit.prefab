@@ -758,6 +758,7 @@ GameObject:
   - component: {fileID: 3237839534594509054}
   - component: {fileID: 7680752084302411906}
   - component: {fileID: 1831346547630347164}
+  - component: {fileID: -373812433683991579}
   - component: {fileID: 5552426492733636700}
   m_Layer: 5
   m_Name: eldritchUnit
@@ -824,6 +825,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 36a7a6059785417408c0bb34a6a0e574, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-373812433683991579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3237839534594509041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d484f65e2b3554e4ba0f0361ed1be92a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!225 &5552426492733636700

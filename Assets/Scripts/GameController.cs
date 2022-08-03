@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
 
     void Awake()
     {
+        instance = this;
         EssenceController.instance.UpdateEssence();
 
         PlayerSwitcher.instance.GetActivePlayer().Deck.Create("roman");
