@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class Hand : MonoBehaviour
 {
-    [SerializeField] private Card[] _cards = new Card[7];
-    [SerializeField] private string[] _animNames = new string[3];
+    public Card[] Cards = new Card[7];
+    public string[] AnimationNames = new string[3];
     
     // public void activateCards()
     // {

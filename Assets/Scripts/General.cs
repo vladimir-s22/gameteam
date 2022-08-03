@@ -31,6 +31,11 @@ public class General : MonoBehaviour, IPointerDownHandler
         }
     }
 
+    public void SetActiveEffect(bool active)
+    {
+        gameObject.transform.Find("GeneralActive").gameObject.SetActive(active);
+    }
+
     public void OnPointerDown(PointerEventData eventData)
     {
         if (PlayerSwitcher.instance.GetActivePlayer().GetGeneral() == GetComponent<General>())

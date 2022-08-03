@@ -5,29 +5,23 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    private Hand _hand;
-    private Board _board;
-    private General _general;
-
-    private Deck _deck = new Deck();
+    [SerializeField] private Hand _hand;
+    [SerializeField] private Board _board;
+    [SerializeField] private General _general;
+    public Deck Deck;
 
     private int _essence = 1;
 
-    private void Awake()
-    {
-        _hand = gameObject.GetComponentInChildren<Hand>();
-        _board = gameObject.GetComponentInChildren<Board>();
-        _general = gameObject.GetComponentInChildren<General>();
-    }
-
     public void IncrementEssence()
     {
-        _essence++;
+        if (_essence <= 10)
+            _essence++;
     }
 
     public void DecrementEssence()
     {
-        _essence--;
+        if (_essence >= 0)
+            _essence--;
     }
 
     public int GetEssence()
@@ -50,4 +44,11 @@ public class Player : MonoBehaviour
         return _general;
     }
 
+    public void Initialize()
+    {
+        Deck = new Deck();
+        _hand = gameObject.GetComponentInChildren<Hand>();
+        _board = gameObject.GetComponentInChildren<Board>();
+        _general = gameObject.GetComponentInChildren<General>();
+    }
 }

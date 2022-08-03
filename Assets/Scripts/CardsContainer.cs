@@ -22,4 +22,38 @@ public class CardsContainer : MonoBehaviour
         else
         { instance = this; }
     }
+
+    public List<CardData> GetEldritchCards()
+    {
+        return EldritchCards;
+    }
+
+    public List<CardData> GetRomanCards()
+    {
+        return RomanCards;
+    }
+
+    public GameObject GetPrefab(CardData cardData)
+    {
+        if (cardData.cardFaction == "Holy Roman Empire")
+        {
+            if (cardData.isSpell)
+            {
+                return RomanSpellPrefab;
+            } else
+            {
+                return RomanUnitPrefab;
+            }
+        } else
+        {
+            if (cardData.isSpell)
+            {
+                return EldritchSpellPrefab;
+            }
+            else
+            {
+                return EldritchUnitPrefab;
+            }
+        }
+    }
 }

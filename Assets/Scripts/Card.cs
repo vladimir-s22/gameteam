@@ -4,93 +4,91 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Card : MonoBehaviour//, IDropHandler, IPointerDownHandler
+public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler//, IPointerDownHandler
 {
-    public CardData cardData = null;
+    public CardData cardData;
 
-    public Text cardTitle = null;
-    public Text cardDescription = null;
-    public Text cardFaction = null;
+    [SerializeField] private Text cardTitle;
+    [SerializeField] private Text cardDescription;
+    [SerializeField] private Text cardFaction;
 
-    public Image cost = null;
-    
-    public Image health = null;
-    public int cardHealth = 0;
+    [SerializeField] private Image cost;
+    [SerializeField] private Image health;
+    [SerializeField] private Image damage;
+    [SerializeField] private Image cardImage;
 
-    public Image damage = null;
-    public int cardDamage = 0;
+    private int cardCost = 0;
+    private int cardHealth = 0;
+    private int cardDamage = 0;
+    private int thorns = 0;
+    private int armour = 0;
 
-    public Image cardImage = null;
     public bool isDraggable = false;
     public bool isActive = false;
-
-    public GameObject activeEffect = null;
-    public GameObject playedEffect = null;
-    public GameObject cardBack = null;
-
     public bool isProtected = false;
     public bool isRooted = false;
 
-    public int thorns = 0;
-    public int armour = 0;
+    [SerializeField] private GameObject activeEffect;
+    [SerializeField] private GameObject playedEffect;
+    [SerializeField] private GameObject cardBack;
 
     public void initialize()
     {
-        // if (cardData == null)
-        // {
-        //     Debug.LogError("Card has no cardData");
-        //     return;
-        // }
+        if (cardData == null)
+        {
+            Debug.LogError("Card has no cardData");
+            return;
+        }
 
-        // cardTitle.text = cardData.cardTitle;
-        // cardDescription.text = cardData.cardDescription;
-        // cardFaction.text = cardData.cardFaction;
+        cardCost = cardData.cost;
+        cardHealth = cardData.health;
+        cardDamage = cardData.damage;
 
-        // Debug.Log("[Card::Initialize] Card name is " + cardData.name);
-        // Debug.Log("[Card::Initialize] Card cost is " + cardData.cost);
-        // Debug.Log("[Card::Initialize] Card health is " + cardData.health);
-        // Debug.Log("[Card::Initialize] Card damage is " + cardData.damage);
+        thorns = cardData.thorns;
+        armour = cardData.armour;
 
-        // cardImage.sprite = cardData.cardImage;
+        updateCardVisual();
+    }
 
-        // cost.sprite = GameController.instance.costNumbers[cardData.cost - 1];
-        // health.sprite = GameController.instance.healthNumbers[cardData.health];
-        // cardHealth = cardData.health;
+    private void updateCardVisual()
+    {
+        cardTitle.text = cardData.cardTitle;
+        cardDescription.text = cardData.cardDescription;
+        cardFaction.text = cardData.cardFaction;
 
-        // if (cardData.damage < 0)
-        // {
-        //     damage.sprite = GameController.instance.damageNumbers[0];
-        // } else
-        // {
-        //     damage.sprite = GameController.instance.damageNumbers[cardData.damage];
-        // }
+        cardImage.sprite = cardData.cardImage;
+        cost.sprite = FontContainer.instance.HealthNumbers[cardCost];
+        health.sprite = FontContainer.instance.HealthNumbers[cardHealth];
 
-        // thorns = cardData.thorns;
-        // armour = cardData.armour;
-        // cardDamage = cardData.damage;
+        if (cardData.damage < 1)
+        {
+            damage.sprite = FontContainer.instance.HealthNumbers[0];
+        } else
+        {
+            damage.sprite = FontContainer.instance.HealthNumbers[cardDamage];
+        }
     }
 
     private void dealDamage(int damage)
     {
-        // cardHealth -= damage;
+        cardHealth -= damage;
 
-        // if (cardHealth <= 0)
-        // {
-        //     health.sprite = GameController.instance.healthNumbers[0];
-        //     GameObject.Destroy(this.gameObject);
-        // } else
-        // {
-        //     health.sprite = GameController.instance.healthNumbers[cardHealth];
-        // }
-            
+        if (cardHealth <= 0)
+        {
+            GameObject.Destroy(this.gameObject);
+        }
+
+        updateCardVisual();
     }
 
-    public void OnDrop(PointerEventData eventData)
+    public void OnPointerEnter(PointerEventData eventData)
     {
-        // if (gameObject.transform.parent.name == "DropZone")
-        // {
-        //     Debug.Log("Dropped card on card");
-        // }
+        GameController.instance.PlayedCard = GetComponent<Card>();
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        GameController.instance.PlayedCard = GetComponent<Card>();
     }
 
     // public void OnPointerDown(PointerEventData eventData)
@@ -119,7 +117,7 @@ public class Card : MonoBehaviour//, IDropHandler, IPointerDownHandler
     //         if (card.transform.parent.name == "DropZone")
     //         {
     //             card.dealDamage(playedCard.cardDamage - card.armour);
-                
+
     //             Debug.Log("[Card::onPointerDown::backDamageCheck] Target card has thorns: " + card.thorns);
     //             playedCard.dealDamage(card.thorns);
 

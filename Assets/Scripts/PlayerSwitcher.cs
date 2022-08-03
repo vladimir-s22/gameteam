@@ -14,12 +14,14 @@ public class PlayerSwitcher : MonoBehaviour
         { Destroy(this); }
         else
         { instance = this; }
+        _activePlayer.Initialize();
+        _inActivePlayer.Initialize();
+
+        _activePlayer.GetGeneral().SetActiveEffect(true);
     }
 
     public void SwitchPlayers()
     {
-        // Debug.Log("[PlayerSwitcher::SwitchPlayers] Active player has " + _activePlayer.GetEssence() + " essence");
-        // Debug.Log("[PlayerSwitcher::SwitchPlayers] Inactive player is " + _inActivePlayer.GetEssence() + " essence");
         Player tempPlayer;
         tempPlayer = _activePlayer;
 
@@ -28,17 +30,22 @@ public class PlayerSwitcher : MonoBehaviour
         _inActivePlayer = tempPlayer;
         _turnNumber++;
         EssenceController.instance.UpdateEssence();
+        updateGeneralsActiveEffect();
     }
 
     public Player GetActivePlayer()
     {
-        // Debug.Log("[PlayerSwitcher::GetActivePlayer] Active player is " + _activePlayer);
         return _activePlayer;
     }
 
     public Player GetInActivePlayer()
     {
-        // Debug.Log("[PlayerSwitcher::GetInActivePlayer] Inactive player is " + _inActivePlayer);
         return _inActivePlayer;
+    }
+
+    private void updateGeneralsActiveEffect()
+    {
+        _activePlayer.GetGeneral().SetActiveEffect(true);
+        _inActivePlayer.GetGeneral().SetActiveEffect(false);
     }
 }

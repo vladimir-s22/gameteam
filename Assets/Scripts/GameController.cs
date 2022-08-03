@@ -6,35 +6,20 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-    public static GameController instance { get; private set; }
-
-    [SerializeField] GameObject canvas;
-    [SerializeField] Card PlayedCard;
+    public static GameController instance;
+    public GameObject canvas;
+    public Card PlayedCard;
 
     void Awake()
     {
-        if (instance != null && instance != this)
-        { Destroy(this); }
-        else
-        { instance = this; }
-
         EssenceController.instance.UpdateEssence();
-        Debug.Log(PlayerSwitcher.instance.GetActivePlayer().GetHand());
-        // playerA.generalActiveEffect.SetActive(true);
 
-        // playerA.essence = GameController.instance.turnNumber;
-        // playerB.essence = GameController.instance.turnNumber;
+        PlayerSwitcher.instance.GetActivePlayer().Deck.Create("roman");
+        PlayerSwitcher.instance.GetInActivePlayer().Deck.Create("eldritch");
 
-        // playerA.hand = playerAHand;
-        // Debug.Log("[Controller::Awake] Current playerA board is " + playerA.board.boardArea);
-
-        // playerB.hand = playerBHand;
-        // Debug.Log("[Controller::Awake] Current playerB board is " + playerB.board.boardArea);
-
-        // Debug.Log("[Controller::Awake] Active player is " + activePlayer);
-        // Debug.Log("[Controller::Awake] Active player essence is " + activePlayer.essence);
-        // Debug.Log("[Controller::Awake] Turn number is " + turnNumber);
+        dealInitialHands();
     }
+
     // Start is called before the first frame update
     // void Start()
     // {
@@ -50,10 +35,10 @@ public class GameController : MonoBehaviour
         // updateHands();
     // }
 
-    // public void quitGame()
-    // {
-    //     SceneManager.LoadScene(0);
-    // }
+    public void QuitGame()
+    {
+        SceneManager.LoadScene(0);
+    }
 
     // public void endTurn()
     // {
@@ -98,34 +83,18 @@ public class GameController : MonoBehaviour
         // endTurnButton.SetActive(true);
     // }
 
-    // internal void dealHands()
-    // {
-        // for (int i = 0; i < 5; i++)
-        // {
-        //     playerADeck.dealCard(playerA.hand);
-        // }
+    internal void dealInitialHands()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            PlayerSwitcher.instance.GetActivePlayer().Deck.dealCard(PlayerSwitcher.instance.GetActivePlayer().GetHand());
+        }
 
-        // for (int i = 0; i < 4; i++)
-        // {
-        //     playerBDeck.dealCard(playerB.hand);
-        // }
-    // }
-
-    // internal void updateEssence()
-    // {
-        // for (int m = 0; m < 10; m++)
-        // {
-        //     if (activePlayer.essence > m)
-        //     {
-        //         essenceBalls[m].SetActive(true);
-        //     } else
-        //     {
-        //         essenceBalls[m].SetActive(false);
-        //     }
-        // }
-
-        // Debug.Log("[GameController::updateEssence] Essence updated. Active player is " + activePlayer + " and his essence is " + activePlayer.essence);
-    // }
+        for (int i = 0; i < 4; i++)
+        {
+            PlayerSwitcher.instance.GetInActivePlayer().Deck.dealCard(PlayerSwitcher.instance.GetInActivePlayer().GetHand());
+        }
+    }
 
     // internal void updateHands()
     // {
@@ -145,9 +114,4 @@ public class GameController : MonoBehaviour
         // GameController.instance.activePlayer.hand.deactivateCards();
         // endTurnButton.SetActive(false);
     // }
-
-    public Card GetPlayedCard()
-    {
-        return PlayedCard;
-    }
 }
