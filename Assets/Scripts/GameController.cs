@@ -6,177 +6,37 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-    static public GameController instance = null;
-
-    public Deck playerADeck = new Deck();
-    public Image playerAcardsInDeck;
-
-    public Deck playerBDeck = new Deck();
-    public Image playerBcardsInDeck;
-
-    public Hand playerAHand = new Hand();
-    public Hand playerBHand = new Hand();
-
-    public Board playerABoard = new Board();
-    public Board playerBBoard = new Board();
-
-    public Player playerA = null;
-    public Player playerB = null;
-
-    public Player activePlayer = null;
-
-    public GameObject canvas = null;
-
-    public int turnNumber = 1;
-
-    public List<CardData> romanCards = new List<CardData>();
-    public List<CardData> eldritchCards = new List<CardData>();
-
-    public GameObject[] essenceBalls = new GameObject[10];
-
-    public Sprite[] healthNumbers = new Sprite[21];
-    public Sprite[] damageNumbers = new Sprite[21];
-    public Sprite[] redGlowNumbers = new Sprite[21];
-    public Sprite[] costNumbers = new Sprite[10];
-
-    public GameObject cardPrefab = null;
-
-    public GameObject eldritchUnitPrefab;
-    public GameObject eldritchSpellPrefab;
-    public GameObject romanUnitPrefab;
-    public GameObject romanSpellPrefab;
-
-    public Card playedCard;
-
-    public GameObject endTurnButton;
+    public static GameController instance;
+    public GameObject canvas;
+    public Card PlayedCard;
 
     void Awake()
     {
         instance = this;
-        activePlayer = playerA;
-        playerA.generalActiveEffect.SetActive(true);
+        EssenceController.instance.UpdateEssence();
 
-        playerA.essence = GameController.instance.turnNumber;
-        playerB.essence = GameController.instance.turnNumber;
+        PlayerSwitcher.instance.GetActivePlayer().Deck.Create("roman");
+        PlayerSwitcher.instance.GetInActivePlayer().Deck.Create("eldritch");
 
-        playerA.hand = playerAHand;
-        // Debug.Log("[Controller::Awake] Current playerA board is " + playerA.board.boardArea);
-
-        playerB.hand = playerBHand;
-        // Debug.Log("[Controller::Awake] Current playerB board is " + playerB.board.boardArea);
-
-        // Debug.Log("[Controller::Awake] Active player is " + activePlayer);
-        // Debug.Log("[Controller::Awake] Active player essence is " + activePlayer.essence);
-        // Debug.Log("[Controller::Awake] Turn number is " + turnNumber);
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        playerADeck.Create();
-        playerBDeck.Create();
-
-        updateEssence();
-        dealHands();
-
-        // playerAcardsInDeck.sprite = GameController.instance.healthNumbers[playerADeck.cardDatas.Count];
-        // playerBcardsInDeck.sprite = GameController.instance.healthNumbers[playerBDeck.cardDatas.Count];
-
-        updateHands();
+        dealInitialHands();
+        PlayerSwitcher.instance.GetActivePlayer().GetHand().AllowDragCards(true);
     }
 
-    public void quitGame()
+    public void QuitGame()
     {
         SceneManager.LoadScene(0);
     }
 
-    public void endTurn()
-    {
-        if (activePlayer == playerA)
-        {
-            // Debug.Log("[Controller::EndTurn::IfActivePlayer] Before switching active player is" + activePlayer);
-            activePlayer = playerB;
-            if (playerBDeck.cardDatas.Count > 0)
-            {
-                playerBDeck.dealCard(playerB.hand);
-            }
-
-            playerA.generalActiveEffect.SetActive(false);
-            playerB.generalActiveEffect.SetActive(true);
-            playerB.board.activateCards();
-            playerA.board.deactivateCards();
-            // Debug.Log("[Controller::EndTurn::IfActivePlayer] Active player is" + activePlayer);
-
-            activePlayer.essence = turnNumber;
-            updateEssence();
-        } else
-        {
-            // Debug.Log("[Controller::EndTurn::IfActivePlayer] Before switching active player is" + activePlayer);
-            turnNumber++;
-            activePlayer = playerA;
-            if (playerADeck.cardDatas.Count > 0)
-            {
-                playerADeck.dealCard(playerA.hand);
-            }
-
-            playerA.generalActiveEffect.SetActive(true);
-            playerB.generalActiveEffect.SetActive(false);
-            playerA.board.activateCards();
-            playerB.board.deactivateCards();
-            // Debug.Log("[Controller::EndTurn::IfActivePlayer] Active player is" + activePlayer);
-            activePlayer.essence = turnNumber;
-            updateEssence();
-        }
-        updateHands();
-        // playerAcardsInDeck.sprite = GameController.instance.healthNumbers[playerADeck.cardDatas.Count];
-        // playerBcardsInDeck.sprite = GameController.instance.healthNumbers[playerBDeck.cardDatas.Count];
-        endTurnButton.SetActive(true);
-    }
-
-    internal void dealHands()
+    internal void dealInitialHands()
     {
         for (int i = 0; i < 5; i++)
         {
-            playerADeck.dealCard(playerA.hand);
+            PlayerSwitcher.instance.GetActivePlayer().Deck.dealCard(PlayerSwitcher.instance.GetActivePlayer().GetHand().gameObject);
         }
 
         for (int i = 0; i < 4; i++)
         {
-            playerBDeck.dealCard(playerB.hand);
+            PlayerSwitcher.instance.GetInActivePlayer().Deck.dealCard(PlayerSwitcher.instance.GetInActivePlayer().GetHand().gameObject);
         }
-    }
-
-    internal void updateEssence()
-    {
-        for (int m = 0; m < 10; m++)
-        {
-            if (activePlayer.essence > m)
-            {
-                essenceBalls[m].SetActive(true);
-            } else
-            {
-                essenceBalls[m].SetActive(false);
-            }
-        }
-
-        // Debug.Log("[GameController::updateEssence] Essence updated. Active player is " + activePlayer + " and his essence is " + activePlayer.essence);
-    }
-
-    internal void updateHands()
-    {
-        if (activePlayer == playerA)
-        {
-            playerA.hand.activateCards();
-            playerB.hand.deactivateCards();
-        } else
-        {
-            playerB.hand.activateCards();
-            playerA.hand.deactivateCards();
-        }
-    }
-
-    public void hideActiveHand()
-    {
-        GameController.instance.activePlayer.hand.deactivateCards();
-        endTurnButton.SetActive(false);
     }
 }

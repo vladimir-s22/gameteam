@@ -803,12 +803,12 @@ MonoBehaviour:
   cardFaction: {fileID: 3237839533359522342}
   cost: {fileID: 3237839533340665860}
   health: {fileID: 3237839535056050495}
-  cardHealth: 0
   damage: {fileID: 3237839534394520329}
-  cardDamage: 0
   cardImage: {fileID: 3237839533063979536}
   isDraggable: 0
   isActive: 0
+  isProtected: 0
+  isRooted: 0
   activeEffect: {fileID: 6189548983758684969}
   playedEffect: {fileID: 1106688512380740109}
   cardBack: {fileID: 3237839533248558036}
