@@ -15,17 +15,17 @@ public class MainMenu : MonoBehaviour {
 
 
     public void startGame() {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
     }
 
     public void howToPlayScene() 
     {
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene(5);
     }
 
     public void loreScene() 
     {
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(4);
     }
 
     public void quitGame() {

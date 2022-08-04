@@ -7,6 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class StartingScreenScript : MonoBehaviour {
     public void ContinueToMainMenu() {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 }
