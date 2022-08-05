@@ -12,4 +12,12 @@ public class Hand : MonoBehaviour
             card.isDraggable = allow;
         }
     }
+
+    public void UpdateGraphics()
+    {
+        foreach (Card card in Cards)
+        {
+            card.UpdateCardVisual();
+        }
+    }
 }

@@ -17,11 +17,11 @@ public class Card : MonoBehaviour, IPointerDownHandler
     [SerializeField] private Image damage;
     [SerializeField] private Image cardImage;
 
-    private int cardCost = 0;
-    private int cardHealth = 0;
-    private int cardDamage = 0;
-    private int thorns = 0;
-    private int armour = 0;
+    [SerializeField] private int cardCost = 0;
+    [SerializeField] private int cardHealth = 0;
+    [SerializeField] private int cardDamage = 0;
+    [SerializeField] private int thorns = 0;
+    [SerializeField] private int armour = 0;
 
     public bool isDraggable = false;
     public bool isActive = false;
@@ -47,10 +47,10 @@ public class Card : MonoBehaviour, IPointerDownHandler
         thorns = cardData.thorns;
         armour = cardData.armour;
 
-        updateCardVisual();
+        UpdateCardVisual();
     }
 
-    private void updateCardVisual()
+    public void UpdateCardVisual()
     {
         cardTitle.text = cardData.cardTitle;
         cardDescription.text = cardData.cardDescription;
@@ -58,9 +58,17 @@ public class Card : MonoBehaviour, IPointerDownHandler
 
         cardImage.sprite = cardData.cardImage;
         cost.sprite = FontContainer.instance.HealthNumbers[cardCost];
-        health.sprite = FontContainer.instance.HealthNumbers[cardHealth];
 
-        if (cardData.damage < 1)
+        if (cardHealth < 1)
+        {
+            health.sprite = FontContainer.instance.HealthNumbers[0];
+        }
+        else
+        {
+            health.sprite = FontContainer.instance.HealthNumbers[cardHealth];
+        }
+
+        if (cardDamage < 1)
         {
             damage.sprite = FontContainer.instance.HealthNumbers[0];
         } else
@@ -78,7 +86,17 @@ public class Card : MonoBehaviour, IPointerDownHandler
             GameObject.Destroy(this.gameObject);
         }
 
-        updateCardVisual();
+        UpdateCardVisual();
+    }
+
+    private void heal(int amount)
+    {
+        if (cardHealth + amount >= cardData.health)
+        {
+            cardHealth = cardData.health;
+        }
+
+        UpdateCardVisual();
     }
 
     public bool CanPlay()
@@ -130,28 +148,35 @@ public class Card : MonoBehaviour, IPointerDownHandler
         Card playedCard = GameController.instance.PlayedCard;
 
         if (playedCard)
-        {
-            if (transform.parent.name == "DropZone")
+        {   
+            if (playedCard.cardData.isSpell && playedCard.cardData.spellType == "damage")
             {
-                dealDamage(playedCard.cardDamage - armour);
-
-                playedCard.dealDamage(thorns);
-
-                if (!playedCard.cardData.isRanged)
+                dealDamage(playedCard.cardData.spellPower);
+                Destroy(playedCard.gameObject);
+                GameController.instance.PlayedCard = null;
+            } else
+            {
+                if (transform.parent.name == "DropZone" && playedCard != this && transform.parent.GetComponent<Board>() != playedCard.transform.parent.GetComponent<Board>())
                 {
-                    if (cardData.isRanged)
+                    dealDamage(playedCard.cardDamage - armour);
+                    playedCard.dealDamage(thorns);
+
+                    if (!playedCard.cardData.isRanged)
                     {
-                        playedCard.dealDamage(0);
-                    } else
-                    {
-                        playedCard.dealDamage(cardDamage - armour);
+                        if (cardData.isRanged)
+                        {
+                            playedCard.dealDamage(0);
+                        } else
+                        {
+                            playedCard.dealDamage(cardDamage - armour);
+                        }
                     }
+                    playedCard.playedEffect.SetActive(false);
+                    GameController.instance.PlayedCard = null;
                 }
             }
-
-            playedCard.playedEffect.SetActive(false);
-            GameController.instance.PlayedCard = null;
-        } else
+        } 
+        else
         {
             if (isActive)
             {
@@ -165,5 +190,52 @@ public class Card : MonoBehaviour, IPointerDownHandler
     public int GetDamage()
     {
         return cardDamage;
+    }
+
+    public void CastSpell()
+    {
+        Player activePlayer = PlayerSwitcher.instance.GetActivePlayer();
+        Player inactivePlayer = PlayerSwitcher.instance.GetInActivePlayer();
+
+        switch (cardData.spellType)
+        {
+            case "draw":
+                {
+                    for (int i = 0; i < cardData.spellPower; i++)
+                    {
+                        Destroy(gameObject);
+                        int listIndex = activePlayer.GetHand().Cards.IndexOf(this);
+                        activePlayer.GetHand().Cards.RemoveAt(listIndex);
+
+                        activePlayer.Deck.dealCard(activePlayer.GetHand().gameObject);
+                    }
+                    break;
+                }
+            case "rejuvenate":
+                {
+                    foreach (Card card in activePlayer.GetBoard().cards)
+                    {
+                        card.heal(cardData.spellPower);
+                    }
+                    activePlayer.GetGeneral().getHeal(cardData.spellPower);
+                    break;
+                }
+            case "damage":
+                {
+                    GameController.instance.PlayedCard = this;
+                    break;
+                }
+            default: break;
+        }
+
+        if (cardData.spellType != "damage")
+        {
+            GameController.instance.PlayedCard = null;
+        }
+
+        if (gameObject && cardData.spellType != "damage")
+        {
+            Destroy(gameObject);
+        }
     }
 }

@@ -402,7 +402,6 @@ GameObject:
   - component: {fileID: 345341811}
   - component: {fileID: 345341810}
   - component: {fileID: 345341814}
-  - component: {fileID: 345341813}
   m_Layer: 5
   m_Name: DropZone
   m_TagString: Untagged
@@ -492,18 +491,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 345341808}
   m_CullTransparentMesh: 1
---- !u!114 &345341813
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 345341808}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 612d01a0a9b5de646b7e11d9c30773b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &345341814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2952,7 +2939,6 @@ GameObject:
   - component: {fileID: 1872034818}
   - component: {fileID: 1872034817}
   - component: {fileID: 1872034821}
-  - component: {fileID: 1872034820}
   m_Layer: 5
   m_Name: DropZone
   m_TagString: Untagged
@@ -3042,18 +3028,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1872034815}
   m_CullTransparentMesh: 1
---- !u!114 &1872034820
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1872034815}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 612d01a0a9b5de646b7e11d9c30773b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1872034821
 MonoBehaviour:
   m_ObjectHideFlags: 0
