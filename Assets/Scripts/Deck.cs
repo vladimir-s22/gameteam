@@ -75,7 +75,7 @@ public class Deck
 
     internal void dealCard(GameObject Hand)
     {
-        if (Hand.GetComponent<Hand>().Cards.Count < 7)
+        if (Hand.GetComponent<Hand>().Cards.Count <= 7)
         {
             createNewCard(Hand);
             // PlayerSwitcher.instance.GetActivePlayer().GetHand().UpdateCards();
