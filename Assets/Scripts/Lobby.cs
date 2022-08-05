@@ -10,7 +10,7 @@ public class Lobby : MonoBehaviour
 {
     public void back()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 
     public Button player1;
@@ -29,7 +29,7 @@ public class Lobby : MonoBehaviour
     {
         if (player1Selected && player2Selected)                        
         {
-            SceneManager.LoadScene(1);      
+            SceneManager.LoadScene(2);      
         }
     }
     void ConfirmSelection1()                 //This confirms the selection of player 1 
