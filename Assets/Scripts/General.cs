@@ -31,6 +31,17 @@ public class General : MonoBehaviour, IPointerDownHandler
         }
     }
 
+    public void getHeal(int healPower)
+    {
+        _health += healPower;
+        if (_health > 20)
+        {
+            _health = 20;
+        }
+
+        HealthImage.sprite = FontContainer.instance.HealthNumbers[_health];
+    }
+
     public void SetActiveEffect(bool active)
     {
         gameObject.transform.Find("GeneralActive").gameObject.SetActive(active);
@@ -42,9 +53,17 @@ public class General : MonoBehaviour, IPointerDownHandler
         {
             if (PlayerSwitcher.instance.GetActivePlayer().GetGeneral() != GetComponent<General>())
             {
-                getDamage(GameController.instance.PlayedCard.GetDamage());
-                GameController.instance.PlayedCard.Activate(false);
-                GameController.instance.PlayedCard = null;
+                if (GameController.instance.PlayedCard.cardData.isSpell && GameController.instance.PlayedCard.cardData.spellType == "damage")
+                {
+                    getDamage(GameController.instance.PlayedCard.cardData.spellPower);
+                    Destroy(GameController.instance.PlayedCard.gameObject);
+                    GameController.instance.PlayedCard = null;
+                } else
+                {
+                    getDamage(GameController.instance.PlayedCard.GetDamage());
+                    GameController.instance.PlayedCard.Activate(false);
+                    GameController.instance.PlayedCard = null;
+                }
             }
         }
     }

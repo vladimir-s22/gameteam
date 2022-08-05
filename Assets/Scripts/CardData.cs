@@ -17,10 +17,12 @@ public class CardData : ScriptableObject
     public Sprite cardImage;
     
     public bool isSpell = false;
-    public string spellType = "";
-
     public bool isRanged = false;
 
     public int thorns = 0;
     public int armour = 0;
+    public int spellPower = 0;
+
+    public string spellType;
+    public string spellTarget;
 }

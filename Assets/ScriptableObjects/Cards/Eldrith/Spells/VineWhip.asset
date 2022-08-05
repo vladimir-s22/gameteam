@@ -17,13 +17,13 @@ MonoBehaviour:
   cardFaction: Eldritchwood Guardians
   cost: 1
   health: 0
-  damage: 1
+  damage: 0
   numberInDeck: 3
   cardImage: {fileID: 21300000, guid: 86a30c72c80ed5d40b7c007b511d7a16, type: 3}
   isSpell: 1
-  spellType: root
   isRanged: 0
-  isProtected: 0
-  isRooted: 0
   thorns: 0
   armour: 0
+  spellPower: 1
+  spellType: damage
+  spellTarget: 

@@ -29,13 +29,13 @@ public class PlayerSwitcher : MonoBehaviour
         _activePlayer.ReplenishEssence(_initialEssence);
         _activePlayer.IncrementEssence();
         _activePlayer.GetHand().AllowDragCards(false);
-        _activePlayer.GetBoard().deactivateCards();
+        _activePlayer.GetBoard().activateCards(false);
 
         // Here player is switched
         _activePlayer = _inActivePlayer;
 
         _activePlayer.Deck.dealCard(_activePlayer.GetHand().gameObject);
-        _activePlayer.GetBoard().activateCards();
+        _activePlayer.GetBoard().activateCards(true);
         _initialEssence = _activePlayer.GetEssence();
         _inActivePlayer = tempPlayer;
         TurnNumber++;

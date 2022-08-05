@@ -60,8 +60,9 @@ public class Deck
         if (card)
         {
             card.cardData = newCardData;
-            card.isDraggable = false;
+            card.isDraggable = true;
             card.initialize();
+            //Debug.Log("[Deck::CreateNewCard] Dealing card " + card.cardData.cardTitle);
             Hand.GetComponent<Hand>().Cards.Add(card);
             
             return card;
@@ -77,6 +78,7 @@ public class Deck
         if (Hand.GetComponent<Hand>().Cards.Count < 7)
         {
             createNewCard(Hand);
+            // PlayerSwitcher.instance.GetActivePlayer().GetHand().UpdateCards();
         }
     }
 }
