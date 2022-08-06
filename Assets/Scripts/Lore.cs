@@ -6,6 +6,6 @@ public class Lore : MonoBehaviour {
 
     // Update is called once per frame
     public void BackToMainMenu() {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 }
