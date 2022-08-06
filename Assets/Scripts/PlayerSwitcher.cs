@@ -34,6 +34,7 @@ public class PlayerSwitcher : MonoBehaviour
         // Here player is switched
         _activePlayer = _inActivePlayer;
 
+        _activePlayer.GetHand().CleanHand();
         _activePlayer.Deck.dealCard(_activePlayer.GetHand().gameObject);
         _activePlayer.GetBoard().activateCards(true);
         _initialEssence = _activePlayer.GetEssence();
