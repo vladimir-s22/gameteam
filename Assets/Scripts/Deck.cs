@@ -73,6 +73,7 @@ public class Deck
         }
     }
 
+
     internal void dealCard(GameObject Hand)
     {
         if (Hand.GetComponent<Hand>().Cards.Count < 7)

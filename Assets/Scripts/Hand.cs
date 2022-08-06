@@ -20,4 +20,15 @@ public class Hand : MonoBehaviour
             card.UpdateCardVisual();
         }
     }
+
+    public void CleanHand()
+    {
+        for (int i = Cards.Count -1; i >= 0; i--)
+        {
+            if (Cards[i] == null)
+            {
+                Cards.RemoveAt(i);
+            }
+        }
+    }
 }

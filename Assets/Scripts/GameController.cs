@@ -19,6 +19,7 @@ public class GameController : MonoBehaviour
         PlayerSwitcher.instance.GetInActivePlayer().Deck.Create("eldritch");
 
         dealInitialHands();
+        PlayerSwitcher.instance.GetInActivePlayer().GetHand().AllowDragCards(false);
         PlayerSwitcher.instance.GetActivePlayer().GetHand().AllowDragCards(true);
     }
 
@@ -29,12 +30,12 @@ public class GameController : MonoBehaviour
 
     internal void dealInitialHands()
     {
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 5; i++)
         {
             PlayerSwitcher.instance.GetActivePlayer().Deck.dealCard(PlayerSwitcher.instance.GetActivePlayer().GetHand().gameObject);
         }
 
-        for (int i = 0; i < 1; i++)
+        for (int i = 0; i < 4; i++)
         {
             PlayerSwitcher.instance.GetInActivePlayer().Deck.dealCard(PlayerSwitcher.instance.GetInActivePlayer().GetHand().gameObject);
         }

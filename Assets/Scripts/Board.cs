@@ -19,9 +19,48 @@ public class Board : MonoBehaviour, IDropHandler
                 }
                 else
                 {
-                    cards[i].Activate(activate);
+                    if (!cards[i].isRooted)
+                    {
+                        cards[i].Activate(activate);
+                    } else
+                    {
+                        cards[i].isRooted = false;
+                    }
                 }
             }
+        }
+    }
+
+    public void DealDamage(int amount)
+    {
+        foreach (Card card in cards)
+        {
+            card.dealDamage(amount);
+        }
+    }
+
+    public void RootBoard()
+    {
+        foreach (Card card in cards)
+        {
+            card.isRooted = true;
+        }
+    }
+
+    public void BuffBoard(int amount, int heal)
+    {
+        foreach (Card card in cards)
+        {
+            card.BuffDamage(amount);
+            card.Heal(heal);
+        }
+    }
+
+    public void HealBoard(int amount)
+    {
+        foreach (Card card in cards)
+        {
+            card.Heal(amount);
         }
     }
 
@@ -30,6 +69,24 @@ public class Board : MonoBehaviour, IDropHandler
         foreach (Card card in cards)
         {
             card.UpdateCardVisual();
+        }
+    }
+
+    public void summonUnit(string cardTitle)
+    {
+        if (cards.Count < 5)
+        {
+            CardData newCardData = Resources.Load(cardTitle) as CardData;
+
+            GameObject newCard = GameObject.Instantiate(CardsContainer.instance.GetPrefab(newCardData), transform);
+            Card card = newCard.GetComponent<Card>();
+
+            card.cardData = newCardData;
+            card.isActive = false;
+            card.isDraggable = false;
+            card.initialize();
+        
+            cards.Add(card);
         }
     }
 
@@ -48,7 +105,7 @@ public class Board : MonoBehaviour, IDropHandler
                 GameController.instance.PlayedCard = card;
                 card.gameObject.SetActive(false);
                 card.CastSpell();
-                if (card.cardData.spellType != "damage")
+                if (card.cardData.spellType != "damage" && card.cardData.spellType != "thorn")
                 {
                     GameController.instance.PlayedCard = null;
                 }

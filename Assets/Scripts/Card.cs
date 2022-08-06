@@ -77,7 +77,7 @@ public class Card : MonoBehaviour, IPointerDownHandler
         }
     }
 
-    private void dealDamage(int damage)
+    public void dealDamage(int damage)
     {
         cardHealth -= damage;
 
@@ -89,7 +89,13 @@ public class Card : MonoBehaviour, IPointerDownHandler
         UpdateCardVisual();
     }
 
-    private void heal(int amount)
+    public void BuffDamage(int amount)
+    {
+        cardDamage += amount;
+        UpdateCardVisual();
+    }
+
+    public void Heal(int amount)
     {
         if (cardHealth + amount >= cardData.health)
         {
@@ -149,13 +155,36 @@ public class Card : MonoBehaviour, IPointerDownHandler
 
         if (playedCard)
         {   
-            if (playedCard.cardData.isSpell && playedCard.cardData.spellType == "damage")
+            if (playedCard.cardData.isSpell && playedCard.cardData.spellType != "thorn")
             {
-                dealDamage(playedCard.cardData.spellPower);
-                Destroy(playedCard.gameObject);
-                GameController.instance.PlayedCard = null;
+                switch (playedCard.cardData.spellType)
+                {
+                    case "damage":
+                        {
+                            dealDamage(playedCard.cardData.spellPower);
+                            Destroy(playedCard.gameObject);
+                            GameController.instance.PlayedCard = null;
+                            break;
+                        }
+                    case "root":
+                        {
+                            dealDamage(playedCard.cardData.spellPower);
+                            isRooted = true;
+                            Destroy(playedCard.gameObject);
+                            GameController.instance.PlayedCard = null;
+                            break;
+                        }
+                    default: break;
+                }
             } else
             {
+                if (playedCard.cardData.isSpell && playedCard.cardData.spellType == "thorn")
+                {
+                    thorns += playedCard.cardData.spellPower;
+                    GameController.instance.PlayedCard = null;
+                    return;
+                }
+
                 if (transform.parent.name == "DropZone" && playedCard != this && transform.parent.GetComponent<Board>() != playedCard.transform.parent.GetComponent<Board>())
                 {
                     dealDamage(playedCard.cardDamage - armour);
@@ -201,22 +230,18 @@ public class Card : MonoBehaviour, IPointerDownHandler
         {
             case "draw":
                 {
+                    int listIndex = activePlayer.GetHand().Cards.IndexOf(this);
+                    activePlayer.GetHand().Cards.RemoveAt(listIndex);
+
                     for (int i = 0; i < cardData.spellPower; i++)
                     {
-                        Destroy(gameObject);
-                        int listIndex = activePlayer.GetHand().Cards.IndexOf(this);
-                        activePlayer.GetHand().Cards.RemoveAt(listIndex);
-
                         activePlayer.Deck.dealCard(activePlayer.GetHand().gameObject);
                     }
                     break;
                 }
             case "rejuvenate":
                 {
-                    foreach (Card card in activePlayer.GetBoard().cards)
-                    {
-                        card.heal(cardData.spellPower);
-                    }
+                    activePlayer.GetBoard().HealBoard(cardData.spellPower);
                     activePlayer.GetGeneral().getHeal(cardData.spellPower);
                     break;
                 }
@@ -225,15 +250,45 @@ public class Card : MonoBehaviour, IPointerDownHandler
                     GameController.instance.PlayedCard = this;
                     break;
                 }
+            case "thorn":
+                {
+                    GameController.instance.PlayedCard = this;
+                    break;
+                }
+            case "buff":
+                {
+                    activePlayer.GetBoard().BuffBoard(cardData.spellPower, cardData.health);
+                    break;
+                }
+            case "root":
+                {
+                    if (cardData.spellTarget == "multi")
+                    {
+                        inactivePlayer.GetBoard().DealDamage(cardData.spellPower);
+                        inactivePlayer.GetBoard().RootBoard();
+                    } else
+                    {
+                        GameController.instance.PlayedCard = this;
+                    }
+                    break;
+                }
+            case "summon":
+                {
+                    for (int i = 0; i < cardData.spellPower; i++)
+                    {
+                        activePlayer.GetBoard().summonUnit(cardData.summonUnit);
+                    }
+                    break;
+                }
             default: break;
         }
 
-        if (cardData.spellType != "damage")
+        if (cardData.spellType != "damage" && cardData.spellType != "thorn")
         {
             GameController.instance.PlayedCard = null;
         }
 
-        if (gameObject && cardData.spellType != "damage")
+        if (gameObject && cardData.spellType != "damage" && cardData.spellType != "thorn")
         {
             Destroy(gameObject);
         }

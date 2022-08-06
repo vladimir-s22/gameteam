@@ -22,7 +22,7 @@ public class General : MonoBehaviour, IPointerDownHandler
             _health = 0;
         }
 
-        HealthImage.sprite = FontContainer.instance.HealthNumbers[_health];
+        HealthImage.sprite = FontContainer.instance.RedGlowNumbers[_health];
 
         if (_health == 0)
         {
@@ -39,7 +39,7 @@ public class General : MonoBehaviour, IPointerDownHandler
             _health = 20;
         }
 
-        HealthImage.sprite = FontContainer.instance.HealthNumbers[_health];
+        HealthImage.sprite = FontContainer.instance.RedGlowNumbers[_health];
     }
 
     public void SetActiveEffect(bool active)
