@@ -21,7 +21,11 @@ MonoBehaviour:
   numberInDeck: 2
   cardImage: {fileID: 21300000, guid: 26e37ed30dab1904f82f363e175b2e15, type: 3}
   isSpell: 0
-  spellType: 
   isRanged: 0
   thorns: 0
-  armour: 0
+  armour: 1
+  spellPower: 0
+  spellType: 
+  spellTarget: 
+  summonUnit: 
+  battleCry: protector

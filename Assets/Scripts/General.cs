@@ -11,6 +11,7 @@ public class General : MonoBehaviour, IPointerDownHandler
     public GameObject winBanner;
 
     public int _health = 20;
+    public bool isProtected = false;
 
     public void getDamage(int damage)
     {
@@ -60,9 +61,19 @@ public class General : MonoBehaviour, IPointerDownHandler
                     GameController.instance.PlayedCard = null;
                 } else
                 {
-                    getDamage(GameController.instance.PlayedCard.GetDamage());
-                    GameController.instance.PlayedCard.Activate(false);
-                    GameController.instance.PlayedCard = null;
+                    if (!isProtected)
+                    {
+                        if (GameController.instance.PlayedCard.cardData.cardTitle == "Bombard Cannon")
+                        {
+                            getDamage(GameController.instance.PlayedCard.GetDamage() * 2);
+                        } else
+                        {
+                            getDamage(GameController.instance.PlayedCard.GetDamage());
+                        }
+
+                        GameController.instance.PlayedCard.Activate(false);
+                        GameController.instance.PlayedCard = null;
+                    }
                 }
             }
         }

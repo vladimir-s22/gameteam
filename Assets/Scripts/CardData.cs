@@ -26,4 +26,5 @@ public class CardData : ScriptableObject
     public string spellType;
     public string spellTarget;
     public string summonUnit;
+    public string battleCry;
 }

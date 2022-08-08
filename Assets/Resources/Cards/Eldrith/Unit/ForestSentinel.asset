@@ -21,7 +21,11 @@ MonoBehaviour:
   numberInDeck: 2
   cardImage: {fileID: 21300000, guid: 816fede31439cde48b5e1db7f45d01db, type: 3}
   isSpell: 0
-  spellType: 
   isRanged: 0
   thorns: 0
   armour: 0
+  spellPower: 1
+  spellType: 
+  spellTarget: 
+  summonUnit: 
+  battleCry: rejuvenate

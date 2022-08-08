@@ -25,5 +25,7 @@ MonoBehaviour:
   thorns: 0
   armour: 0
   spellPower: 2
-  spellType: heal
+  spellType: grow
   spellTarget: single
+  summonUnit: 
+  battleCry: 

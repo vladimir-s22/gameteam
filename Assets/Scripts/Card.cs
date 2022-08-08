@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -79,10 +79,17 @@ public class Card : MonoBehaviour, IPointerDownHandler
 
     public void dealDamage(int damage)
     {
+
         cardHealth -= damage;
 
         if (cardHealth <= 0)
         {
+            Debug.Log($"[Card::dealDamage] Removed card is {cardData.cardTitle}");
+            if (cardData.battleCry == "protector")
+            {
+                GetComponentInParent<Board>().RemoveProtect();
+            }
+
             GameObject.Destroy(this.gameObject);
         }
 
@@ -101,6 +108,14 @@ public class Card : MonoBehaviour, IPointerDownHandler
         {
             cardHealth = cardData.health;
         }
+
+        UpdateCardVisual();
+    }
+
+    public void IncreaseBaseHealth(int amount)
+    {
+        cardHealth += amount;
+        cardData.health += amount;
 
         UpdateCardVisual();
     }
@@ -140,12 +155,15 @@ public class Card : MonoBehaviour, IPointerDownHandler
 
     public void Activate(bool enable)
     {
-        activeEffect.SetActive(enable);
-        isActive = enable;
-
-        if (!enable)
+        if (cardDamage > 0)
         {
-            playedEffect.SetActive(enable);
+            activeEffect.SetActive(enable);
+            isActive = enable;
+
+            if (!enable)
+            {
+                playedEffect.SetActive(enable);
+            }
         }
     }
 
@@ -161,6 +179,11 @@ public class Card : MonoBehaviour, IPointerDownHandler
                 {
                     case "damage":
                         {
+                            if (playedCard.cardData.cardTitle == "Vine Whip")
+                            {
+                                isRooted = true;
+                            }
+
                             dealDamage(playedCard.cardData.spellPower);
                             Destroy(playedCard.gameObject);
                             GameController.instance.PlayedCard = null;
@@ -174,6 +197,11 @@ public class Card : MonoBehaviour, IPointerDownHandler
                             GameController.instance.PlayedCard = null;
                             break;
                         }
+                    case "grow":
+                        {
+                            IncreaseBaseHealth(playedCard.cardData.spellPower);
+                            break;
+                        }
                     default: break;
                 }
             } else
@@ -185,19 +213,31 @@ public class Card : MonoBehaviour, IPointerDownHandler
                     return;
                 }
 
-                if (transform.parent.name == "DropZone" && playedCard != this && transform.parent.GetComponent<Board>() != playedCard.transform.parent.GetComponent<Board>())
+                if (transform.parent.name == "DropZone" && playedCard != this && transform.parent.GetComponent<Board>() != playedCard.transform.parent.GetComponent<Board>() && !isProtected)
                 {
                     dealDamage(playedCard.cardDamage - armour);
+                    if (playedCard.cardData.cardTitle == "Thornbush Golem")
+                    {
+                        isRooted = true;
+                    }
+
+
                     playedCard.dealDamage(thorns);
 
                     if (!playedCard.cardData.isRanged)
                     {
+                        if (cardData.cardTitle == "Thornbush Golem")
+                        {
+                            playedCard.isRooted = true;
+                        }
+
                         if (cardData.isRanged)
                         {
                             playedCard.dealDamage(0);
                         } else
                         {
                             playedCard.dealDamage(cardDamage - armour);
+                            
                         }
                     }
                     playedCard.playedEffect.SetActive(false);
@@ -221,6 +261,11 @@ public class Card : MonoBehaviour, IPointerDownHandler
         return cardDamage;
     }
 
+    public void AddArmour(int amount)
+    {
+        armour += amount;
+    }
+
     public void CastSpell()
     {
         Player activePlayer = PlayerSwitcher.instance.GetActivePlayer();
@@ -242,6 +287,7 @@ public class Card : MonoBehaviour, IPointerDownHandler
             case "rejuvenate":
                 {
                     activePlayer.GetBoard().HealBoard(cardData.spellPower);
+                    activePlayer.GetBoard().BuffBoard(0, 1);
                     activePlayer.GetGeneral().getHeal(cardData.spellPower);
                     break;
                 }
@@ -251,6 +297,11 @@ public class Card : MonoBehaviour, IPointerDownHandler
                     break;
                 }
             case "thorn":
+                {
+                    GameController.instance.PlayedCard = this;
+                    break;
+                }
+            case "grow":
                 {
                     GameController.instance.PlayedCard = this;
                     break;
