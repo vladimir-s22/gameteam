@@ -25,5 +25,7 @@ MonoBehaviour:
   thorns: 0
   armour: 0
   spellPower: 1
-  spellType: root
+  spellType: damage
   spellTarget: single
+  summonUnit: 
+  battleCry: 

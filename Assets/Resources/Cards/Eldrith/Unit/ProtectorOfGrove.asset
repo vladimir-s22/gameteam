@@ -28,3 +28,4 @@ MonoBehaviour:
   spellType: 
   spellTarget: 
   summonUnit: 
+  battleCry: protector

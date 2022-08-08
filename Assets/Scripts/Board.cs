@@ -1,10 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class Board : MonoBehaviour, IDropHandler
 {
+    public delegate void PlayedCardDelegate(Card card);
+    public event PlayedCardDelegate onCardPlay;
+
     public List<Card> cards;
 
     public void activateCards(bool activate)
@@ -52,7 +57,7 @@ public class Board : MonoBehaviour, IDropHandler
         foreach (Card card in cards)
         {
             card.BuffDamage(amount);
-            card.Heal(heal);
+            card.IncreaseBaseHealth(heal);
         }
     }
 
@@ -61,6 +66,33 @@ public class Board : MonoBehaviour, IDropHandler
         foreach (Card card in cards)
         {
             card.Heal(amount);
+        }
+    }
+
+    public void Protect()
+    {
+        foreach (Card card in cards)
+        {
+            if (card.cardData.battleCry != "protector")
+            {
+                card.isProtected = true;
+            }
+        }
+
+        PlayerSwitcher.instance.GetActivePlayer().GetGeneral().isProtected = true;
+    }
+
+    public void RemoveProtect()
+    {
+        if (cards.Any(x => x.cardData.battleCry == "protector"))
+        {
+            foreach (Card card in cards)
+            {
+                Debug.Log($"[Board::removeProtect] Removed protected flag on {card.cardData.cardTitle}");
+                card.isProtected = false;
+            }
+
+            PlayerSwitcher.instance.GetInActivePlayer().GetGeneral().isProtected = false;
         }
     }
 
@@ -112,8 +144,10 @@ public class Board : MonoBehaviour, IDropHandler
             }
             else
             {
+                onCardPlay?.Invoke(card);
                 card.copyCard(GetComponent<Board>());
             }
+
             card.PlayCard();
         }
     }
