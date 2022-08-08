@@ -19,6 +19,7 @@ public class Card : MonoBehaviour, IPointerDownHandler
 
     [SerializeField] private int cardCost = 0;
     [SerializeField] private int cardHealth = 0;
+    [SerializeField] private int cardMaxHealth = 0;
     [SerializeField] private int cardDamage = 0;
     [SerializeField] private int thorns = 0;
     [SerializeField] private int armour = 0;
@@ -42,6 +43,7 @@ public class Card : MonoBehaviour, IPointerDownHandler
 
         cardCost = cardData.cost;
         cardHealth = cardData.health;
+        cardMaxHealth = cardData.health;
         cardDamage = cardData.damage;
 
         thorns = cardData.thorns;
@@ -84,7 +86,6 @@ public class Card : MonoBehaviour, IPointerDownHandler
 
         if (cardHealth <= 0)
         {
-            Debug.Log($"[Card::dealDamage] Removed card is {cardData.cardTitle}");
             if (cardData.battleCry == "protector")
             {
                 GetComponentInParent<Board>().RemoveProtect();
@@ -104,9 +105,12 @@ public class Card : MonoBehaviour, IPointerDownHandler
 
     public void Heal(int amount)
     {
-        if (cardHealth + amount >= cardData.health)
+        if (cardHealth + amount >= cardMaxHealth)
         {
-            cardHealth = cardData.health;
+            cardHealth = cardMaxHealth;
+        } else
+        {
+            cardHealth += amount;
         }
 
         UpdateCardVisual();
@@ -115,7 +119,7 @@ public class Card : MonoBehaviour, IPointerDownHandler
     public void IncreaseBaseHealth(int amount)
     {
         cardHealth += amount;
-        cardData.health += amount;
+        cardMaxHealth += amount;
 
         UpdateCardVisual();
     }
@@ -135,6 +139,11 @@ public class Card : MonoBehaviour, IPointerDownHandler
     {
         GameObject newCard = GameObject.Instantiate(CardsContainer.instance.GetPrefab(cardData), cardArea.transform);
         Card card = newCard.GetComponent<Card>();
+
+        if (cardArea.IfProtectorOnBoard())
+        {
+            card.isProtected = true;
+        }
 
         card.cardData = cardData;
         card.isDraggable = false;
@@ -179,14 +188,17 @@ public class Card : MonoBehaviour, IPointerDownHandler
                 {
                     case "damage":
                         {
-                            if (playedCard.cardData.cardTitle == "Vine Whip")
+                            if (transform.parent.name == "DropZone")
                             {
-                                isRooted = true;
-                            }
+                                if (playedCard.cardData.cardTitle == "Vine Whip")
+                                {
+                                    isRooted = true;
+                                }
 
-                            dealDamage(playedCard.cardData.spellPower);
-                            Destroy(playedCard.gameObject);
-                            GameController.instance.PlayedCard = null;
+                                dealDamage(playedCard.cardData.spellPower);
+                                Destroy(playedCard.gameObject);
+                                GameController.instance.PlayedCard = null;
+                            }
                             break;
                         }
                     case "root":
@@ -200,6 +212,7 @@ public class Card : MonoBehaviour, IPointerDownHandler
                     case "grow":
                         {
                             IncreaseBaseHealth(playedCard.cardData.spellPower);
+                            GameController.instance.PlayedCard = null;
                             break;
                         }
                     default: break;
@@ -209,13 +222,21 @@ public class Card : MonoBehaviour, IPointerDownHandler
                 if (playedCard.cardData.isSpell && playedCard.cardData.spellType == "thorn")
                 {
                     thorns += playedCard.cardData.spellPower;
+                    Destroy(playedCard.gameObject);
                     GameController.instance.PlayedCard = null;
                     return;
                 }
 
                 if (transform.parent.name == "DropZone" && playedCard != this && transform.parent.GetComponent<Board>() != playedCard.transform.parent.GetComponent<Board>() && !isProtected)
                 {
-                    dealDamage(playedCard.cardDamage - armour);
+                    if (armour >= playedCard.cardDamage)
+                    {
+                        dealDamage(1);
+                    } else
+                    {
+                        dealDamage(playedCard.cardDamage - armour);
+                    }
+
                     if (playedCard.cardData.cardTitle == "Thornbush Golem")
                     {
                         isRooted = true;
@@ -236,8 +257,13 @@ public class Card : MonoBehaviour, IPointerDownHandler
                             playedCard.dealDamage(0);
                         } else
                         {
-                            playedCard.dealDamage(cardDamage - armour);
-                            
+                            if (playedCard.armour >= cardDamage)
+                            {
+                                playedCard.dealDamage(1);
+                            } else
+                            {
+                                playedCard.dealDamage(cardDamage - armour);
+                            }
                         }
                     }
                     playedCard.playedEffect.SetActive(false);
@@ -334,12 +360,12 @@ public class Card : MonoBehaviour, IPointerDownHandler
             default: break;
         }
 
-        if (cardData.spellType != "damage" && cardData.spellType != "thorn")
+        if (cardData.spellType != "damage" && cardData.spellType != "thorn" && cardData.spellType != "grow")
         {
             GameController.instance.PlayedCard = null;
         }
 
-        if (gameObject && cardData.spellType != "damage" && cardData.spellType != "thorn")
+        if (gameObject && cardData.spellType != "damage" && cardData.spellType != "thorn" && cardData.spellType != "grow")
         {
             Destroy(gameObject);
         }

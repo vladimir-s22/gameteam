@@ -84,15 +84,25 @@ public class Board : MonoBehaviour, IDropHandler
 
     public void RemoveProtect()
     {
-        if (cards.Any(x => x.cardData.battleCry == "protector"))
+        if (IfProtectorOnBoard())
         {
             foreach (Card card in cards)
             {
-                Debug.Log($"[Board::removeProtect] Removed protected flag on {card.cardData.cardTitle}");
                 card.isProtected = false;
             }
 
             PlayerSwitcher.instance.GetInActivePlayer().GetGeneral().isProtected = false;
+        }
+    }
+
+    public bool IfProtectorOnBoard()
+    {
+        if (cards.Any(x=> x.cardData.battleCry == "protector"))
+        {
+            return true;
+        } else
+        {
+            return false;
         }
     }
 
@@ -131,24 +141,29 @@ public class Board : MonoBehaviour, IDropHandler
 
         if (card.CanPlay() && card.isDraggable && activePlayerBoard == this)
         {
-            card.isDraggable = false;
             if (card.cardData.isSpell)
             {
                 GameController.instance.PlayedCard = card;
                 card.gameObject.SetActive(false);
                 card.CastSpell();
-                if (card.cardData.spellType != "damage" && card.cardData.spellType != "thorn")
+                if (card.cardData.spellType != "damage" && card.cardData.spellType != "thorn" && card.cardData.spellType != "grow")
                 {
                     GameController.instance.PlayedCard = null;
                 }
+                card.isDraggable = false;
+                card.PlayCard();
             }
             else
             {
-                onCardPlay?.Invoke(card);
-                card.copyCard(GetComponent<Board>());
-            }
+                if (cards.Count < 5)
+                {
+                    onCardPlay?.Invoke(card);
+                    card.copyCard(this);
 
-            card.PlayCard();
+                    card.isDraggable = false;
+                    card.PlayCard();
+                }
+            }
         }
     }
 }
