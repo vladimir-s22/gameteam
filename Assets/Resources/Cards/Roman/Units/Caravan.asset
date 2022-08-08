@@ -24,7 +24,8 @@ MonoBehaviour:
   isRanged: 0
   thorns: 0
   armour: 0
-  spellPower: 0
-  spellType: 
+  spellPower: 1
+  spellType: draw
   spellTarget: 
   summonUnit: 
+  battleCry: 

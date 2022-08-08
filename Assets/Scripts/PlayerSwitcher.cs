@@ -34,6 +34,24 @@ public class PlayerSwitcher : MonoBehaviour
         // Here player is switched
         _activePlayer = _inActivePlayer;
 
+        foreach (Card card in _activePlayer.GetBoard().cards)
+        {
+            if (card.cardData.spellType == "draw")
+            {
+                for (int i = 0; i < card.cardData.spellPower; i++)
+                {
+                    _activePlayer.Deck.dealCard(_activePlayer.GetHand().gameObject);
+                }
+            }
+
+            if (card.cardData.spellType == "rejuvenate")
+            {
+                _activePlayer.GetBoard().HealBoard(card.cardData.spellPower);
+                _activePlayer.GetGeneral().getHeal(card.cardData.spellPower);
+            }
+        }
+
+
         _activePlayer.GetHand().CleanHand();
         _activePlayer.Deck.dealCard(_activePlayer.GetHand().gameObject);
         _activePlayer.GetBoard().activateCards(true);
