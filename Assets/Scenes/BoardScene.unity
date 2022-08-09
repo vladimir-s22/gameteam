@@ -878,6 +878,7 @@ MonoBehaviour:
   winScreen: {fileID: 1083669036}
   winBanner: {fileID: 1614323953}
   _health: 20
+  isProtected: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1154,6 +1155,7 @@ MonoBehaviour:
   winScreen: {fileID: 1083669036}
   winBanner: {fileID: 1745050255}
   _health: 20
+  isProtected: 0
 --- !u!1 &757077647
 GameObject:
   m_ObjectHideFlags: 0
@@ -2222,7 +2224,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1506692631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2267,9 +2269,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1744064347}
-        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
-        m_MethodName: hideActiveHand
+      - m_Target: {fileID: 1744064351}
+        m_TargetAssemblyTypeName: PlayerSwitcher, Assembly-CSharp
+        m_MethodName: HideActiveHand
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2803,6 +2805,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 345a75a468cf1fa499e39831c6a33b28, type: 2}
   - {fileID: 11400000, guid: 3c11b5b46e2a0a64293990678f912202, type: 2}
   - {fileID: 11400000, guid: 69434ea5e1210f44db1694433c5accbd, type: 2}
+  - {fileID: 11400000, guid: 69646019f54f5b24f8f95134fe000cfb, type: 2}
   EldritchCards:
   - {fileID: 11400000, guid: 144d19b49a531fa40b86adb14bf37f24, type: 2}
   - {fileID: 11400000, guid: 7ff8022e8f3e3444580f8ce8aeb95f7a, type: 2}
@@ -2838,6 +2841,7 @@ MonoBehaviour:
   _activePlayer: {fileID: 526089648}
   _inActivePlayer: {fileID: 2033001786}
   TurnNumber: 1
+  EndTurnButton: {fileID: 1506692630}
 --- !u!114 &1744064352
 MonoBehaviour:
   m_ObjectHideFlags: 0

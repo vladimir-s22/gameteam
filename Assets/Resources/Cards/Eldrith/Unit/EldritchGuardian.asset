@@ -13,17 +13,17 @@ MonoBehaviour:
   m_Name: EldritchGuardian
   m_EditorClassIdentifier: 
   cardTitle: Eldritch Guardian
-  cardDescription: 
+  cardDescription: Protector
   cardFaction: Eldritchwood Guardians
   cost: 4
   health: 7
   damage: 3
   numberInDeck: 2
-  cardImage: {fileID: 21300000, guid: 26e37ed30dab1904f82f363e175b2e15, type: 3}
+  cardImage: {fileID: 21300000, guid: b13e764ed9b7f2f49b7bf8f07caaf4fc, type: 3}
   isSpell: 0
   isRanged: 0
   thorns: 0
-  armour: 1
+  armour: 0
   spellPower: 0
   spellType: 
   spellTarget: 

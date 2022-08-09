@@ -20,7 +20,6 @@ public class BattleCry : MonoBehaviour
         {
             case "increaseArmour":
                 {
-                    Debug.Log("[BattleCry] Adding 1 armour to all");
                     addArmour(1);
                     break;
                 }

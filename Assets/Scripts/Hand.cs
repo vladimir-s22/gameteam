@@ -31,4 +31,15 @@ public class Hand : MonoBehaviour
             }
         }
     }
+
+    public void HideHand(bool show)
+    {
+        foreach (Card card in Cards)
+        {
+            if (card.gameObject)
+            {
+                card.ShowBack(show);
+            }
+        }
+    }
 }
