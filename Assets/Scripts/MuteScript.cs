@@ -7,6 +7,7 @@ public class MuteScript : MonoBehaviour
 {
     [SerializeField] Image SoundOnIcon;
     [SerializeField] Image SoundOffIcon;
+    [SerializeField] AudioSource audioSource;
     private bool muted = false;
     
     void Start() 
@@ -22,6 +23,7 @@ public class MuteScript : MonoBehaviour
         }
         UpdateButtonIcon();
         AudioListener.pause = muted;
+        
     }
 
     public void OnButtonPress() 
