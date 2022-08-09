@@ -5,8 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class HowToPlay : MonoBehaviour
 {
-   public void backToMenu() 
+    public AudioSource clickSoundMain;
+
+    public void backToMenu() 
     {
         SceneManager.LoadScene(1);
+    }
+
+    public void playSoundOnClick()
+    {
+        clickSoundMain.Play();
+    }
+    void Awake()
+    {
+        DontDestroyOnLoad(clickSoundMain);
     }
 }

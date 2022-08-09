@@ -37,7 +37,12 @@ public class MainMenu : MonoBehaviour {
     }
 
  
-    public void playSoundOnClick(){
+    public void playSoundOnClick()
+    {
         clickSoundMain.Play();
+    }
+    void Awake() 
+    {
+        DontDestroyOnLoad(clickSoundMain);
     }
 }
