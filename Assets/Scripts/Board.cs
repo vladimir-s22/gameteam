@@ -132,6 +132,17 @@ public class Board : MonoBehaviour, IDropHandler
         }
     }
 
+    public void CleanBoard()
+    {
+        for (int i = cards.Count - 1; i >= 0; i--)
+        {
+            if (cards[i] == null)
+            {
+                cards.RemoveAt(i);
+            }
+        }
+    }
+
     public void OnDrop(PointerEventData eventData)
     {
         GameObject dragObject = eventData.pointerDrag;

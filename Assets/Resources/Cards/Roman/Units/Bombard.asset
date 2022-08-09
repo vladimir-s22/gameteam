@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Bombard
   m_EditorClassIdentifier: 
   cardTitle: Bombard Cannon
-  cardDescription: 
+  cardDescription: Ranged unit. Deals double damage to generals
   cardFaction: Holy Roman Empire
   cost: 3
   health: 2
   damage: 3
   numberInDeck: 1
-  cardImage: {fileID: 21300000, guid: 31c2c495704bb4747baec494e3126493, type: 3}
+  cardImage: {fileID: 21300000, guid: aee465d669d73aa4ebd68362bd6aaeea, type: 3}
   isSpell: 0
   isRanged: 1
   thorns: 0
@@ -28,3 +28,4 @@ MonoBehaviour:
   spellType: 
   spellTarget: 
   summonUnit: 
+  battleCry: 

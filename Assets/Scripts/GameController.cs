@@ -20,6 +20,8 @@ public class GameController : MonoBehaviour
 
         dealInitialHands();
         PlayerSwitcher.instance.GetInActivePlayer().GetHand().AllowDragCards(false);
+        PlayerSwitcher.instance.GetInActivePlayer().GetHand().HideHand(true);
+
         PlayerSwitcher.instance.GetActivePlayer().GetHand().AllowDragCards(true);
     }
 

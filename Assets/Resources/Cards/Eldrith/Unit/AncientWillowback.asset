@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: AncientWillowback
   m_EditorClassIdentifier: 
   cardTitle: Ancient Willowback
-  cardDescription: 
+  cardDescription: Casts rejuvenate 3 when played
   cardFaction: Eldritchwood Guardians
   cost: 10
   health: 15
   damage: 5
   numberInDeck: 1
-  cardImage: {fileID: 21300000, guid: 8b2c393fe6a732245a94a42d1febb7ef, type: 3}
+  cardImage: {fileID: 21300000, guid: a88f2181814754946844aaad7fa22bba, type: 3}
   isSpell: 0
   isRanged: 0
   thorns: 0

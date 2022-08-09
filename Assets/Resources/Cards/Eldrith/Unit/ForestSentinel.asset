@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: ForestSentinel
   m_EditorClassIdentifier: 
   cardTitle: Forest Sentinel
-  cardDescription: 
+  cardDescription: Casts rejuvenate 1 when played
   cardFaction: Eldritchwood Guardians
   cost: 2
   health: 3
   damage: 2
   numberInDeck: 2
-  cardImage: {fileID: 21300000, guid: 816fede31439cde48b5e1db7f45d01db, type: 3}
+  cardImage: {fileID: 21300000, guid: 0e47d26120a7ea0448c62c80cb55c663, type: 3}
   isSpell: 0
   isRanged: 0
   thorns: 0

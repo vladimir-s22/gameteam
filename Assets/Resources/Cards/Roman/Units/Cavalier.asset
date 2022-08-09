@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: cavalier
   m_EditorClassIdentifier: 
   cardTitle: Cavalier
-  cardDescription: 
+  cardDescription: Protector
   cardFaction: Holy Roman Empire
   cost: 4
   health: 5

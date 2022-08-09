@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: teutonicKnight
   m_EditorClassIdentifier: 
   cardTitle: Teutonic Knight
-  cardDescription: 
+  cardDescription: Armour 1
   cardFaction: Holy Roman Empire
   cost: 9
   health: 10
   damage: 6
   numberInDeck: 1
-  cardImage: {fileID: 21300000, guid: b675376e6df057e42ab0d71808b606eb, type: 3}
+  cardImage: {fileID: 21300000, guid: 36014260de68a0548924d989fa480e0b, type: 3}
   isSpell: 0
   isRanged: 0
   thorns: 0
@@ -28,3 +28,4 @@ MonoBehaviour:
   spellType: 
   spellTarget: 
   summonUnit: 
+  battleCry: 
