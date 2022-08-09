@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: squire
   m_EditorClassIdentifier: 
   cardTitle: Squire
-  cardDescription: 
+  cardDescription: Adds 1 armour to all friendly units
   cardFaction: Holy Roman Empire
   cost: 3
   health: 2

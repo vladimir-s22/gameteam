@@ -2224,7 +2224,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1506692631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2269,9 +2269,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1744064347}
-        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
-        m_MethodName: hideActiveHand
+      - m_Target: {fileID: 1744064351}
+        m_TargetAssemblyTypeName: PlayerSwitcher, Assembly-CSharp
+        m_MethodName: HideActiveHand
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2841,6 +2841,7 @@ MonoBehaviour:
   _activePlayer: {fileID: 526089648}
   _inActivePlayer: {fileID: 2033001786}
   TurnNumber: 1
+  EndTurnButton: {fileID: 1506692630}
 --- !u!114 &1744064352
 MonoBehaviour:
   m_ObjectHideFlags: 0

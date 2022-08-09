@@ -9,6 +9,8 @@ public class PlayerSwitcher : MonoBehaviour
     private int _initialEssence = 1;
     public int TurnNumber = 1;
 
+    public GameObject EndTurnButton;
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -25,6 +27,8 @@ public class PlayerSwitcher : MonoBehaviour
 
     public void SwitchPlayers()
     {
+        EndTurnButton.SetActive(true);
+
         Player tempPlayer = _activePlayer;
         _activePlayer.ReplenishEssence(_initialEssence);
         _activePlayer.IncrementEssence();
@@ -34,6 +38,7 @@ public class PlayerSwitcher : MonoBehaviour
         // Here player is switched
         _activePlayer = _inActivePlayer;
 
+        _activePlayer.GetHand().HideHand(false);
         foreach (Card card in _activePlayer.GetBoard().cards)
         {
             if (card.cardData.spellType == "draw")
@@ -77,5 +82,12 @@ public class PlayerSwitcher : MonoBehaviour
     {
         _activePlayer.GetGeneral().SetActiveEffect(true);
         _inActivePlayer.GetGeneral().SetActiveEffect(false);
+    }
+
+    public void HideActiveHand()
+    {
+        _activePlayer.GetHand().CleanHand();
+        _activePlayer.GetHand().HideHand(true);
+        EndTurnButton.SetActive(false);
     }
 }

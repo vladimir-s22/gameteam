@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EldritchwoodMatron
   m_EditorClassIdentifier: 
   cardTitle: Eldritchwood Matron
-  cardDescription: 
+  cardDescription: Casts rejuvenate 2 when played
   cardFaction: Eldritchwood Guardians
   cost: 5
   health: 5

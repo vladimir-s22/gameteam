@@ -99,6 +99,12 @@ public class Card : MonoBehaviour, IPointerDownHandler
 
     public void BuffDamage(int amount)
     {
+        if (cardDamage == 0)
+        {
+            isActive = true;
+            activeEffect.SetActive(true);
+        }
+
         cardDamage += amount;
         UpdateCardVisual();
     }
@@ -140,7 +146,7 @@ public class Card : MonoBehaviour, IPointerDownHandler
         GameObject newCard = GameObject.Instantiate(CardsContainer.instance.GetPrefab(cardData), cardArea.transform);
         Card card = newCard.GetComponent<Card>();
 
-        if (cardArea.IfProtectorOnBoard())
+        if (cardArea.IfProtectorOnBoard() && cardData.battleCry != "protector")
         {
             card.isProtected = true;
         }
@@ -212,6 +218,7 @@ public class Card : MonoBehaviour, IPointerDownHandler
                     case "grow":
                         {
                             IncreaseBaseHealth(playedCard.cardData.spellPower);
+                            Destroy(playedCard.gameObject);
                             GameController.instance.PlayedCard = null;
                             break;
                         }
@@ -257,7 +264,7 @@ public class Card : MonoBehaviour, IPointerDownHandler
                             playedCard.dealDamage(0);
                         } else
                         {
-                            if (playedCard.armour >= cardDamage)
+                            if (playedCard.armour >= cardDamage && cardDamage > 0)
                             {
                                 playedCard.dealDamage(1);
                             } else
@@ -290,6 +297,14 @@ public class Card : MonoBehaviour, IPointerDownHandler
     public void AddArmour(int amount)
     {
         armour += amount;
+    }
+
+    public void ShowBack(bool show)
+    {
+        if (gameObject)
+        {
+            cardBack.SetActive(show);
+        }
     }
 
     public void CastSpell()
@@ -351,6 +366,7 @@ public class Card : MonoBehaviour, IPointerDownHandler
                 }
             case "summon":
                 {
+                    activePlayer.GetBoard().CleanBoard();
                     for (int i = 0; i < cardData.spellPower; i++)
                     {
                         activePlayer.GetBoard().summonUnit(cardData.summonUnit);
