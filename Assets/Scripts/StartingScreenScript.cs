@@ -5,8 +5,21 @@ using UnityEngine.SceneManagement;
 
 
 
-public class StartingScreenScript : MonoBehaviour {
-    public void ContinueToMainMenu() {
+public class StartingScreenScript : MonoBehaviour 
+{
+    public AudioSource clickSoundMain;
+
+    public void ContinueToMainMenu() 
+    {
         SceneManager.LoadScene(1);
+    }
+
+    public void playSoundOnClick()
+    {
+        clickSoundMain.Play();
+    }
+    void Awake()
+    {
+        DontDestroyOnLoad(clickSoundMain);
     }
 }

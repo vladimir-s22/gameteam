@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
     public static GameController instance;
     public GameObject canvas;
     public Card PlayedCard;
+    public AudioSource clickSoundMain;
 
     void Awake()
     {
@@ -23,6 +24,7 @@ public class GameController : MonoBehaviour
         PlayerSwitcher.instance.GetInActivePlayer().GetHand().HideHand(true);
 
         PlayerSwitcher.instance.GetActivePlayer().GetHand().AllowDragCards(true);
+        DontDestroyOnLoad(clickSoundMain);
     }
 
     public void QuitGame()
@@ -41,5 +43,10 @@ public class GameController : MonoBehaviour
         {
             PlayerSwitcher.instance.GetInActivePlayer().Deck.dealCard(PlayerSwitcher.instance.GetInActivePlayer().GetHand().gameObject);
         }
+    }
+
+    public void playSoundOnClick()
+    {
+        clickSoundMain.Play();
     }
 }
