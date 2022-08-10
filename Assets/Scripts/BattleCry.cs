@@ -51,6 +51,7 @@ public class BattleCry : MonoBehaviour
         foreach (Card iterateCard in _board.cards)
         {
             iterateCard.AddArmour(amount);
+            iterateCard.UpdateCardVisual();
         }
     }
 }
