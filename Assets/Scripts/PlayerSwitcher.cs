@@ -35,6 +35,11 @@ public class PlayerSwitcher : MonoBehaviour
         _activePlayer.GetHand().AllowDragCards(false);
         _activePlayer.GetBoard().activateCards(false);
 
+        if (GameController.instance.PlayedCard)
+        {
+            GameController.instance.PlayedCard = null;
+        }
+
         // Here player is switched
         _activePlayer = _inActivePlayer;
 
