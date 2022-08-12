@@ -3,49 +3,49 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BackgroundMusic : MonoBehaviour 
+public class BackgroundMusic : MonoBehaviour
 {
-    private static BackgroundMusic backgroundMusic;
     private AudioSource audioSource;
     public AudioClip[] playlist;
-    public bool randomPlay = false;
     int playlistOrder = 0;
 
-    void Start () 
+    void Start()
     {
         audioSource = FindObjectOfType<AudioSource>();
         audioSource.loop = false;
     }
 
-
-    void Update () 
+    public void Update () 
     {
         if (!audioSource.isPlaying) 
         {
-            if(randomPlay == true) 
+            if(MuteScript.muted) 
             {
-                audioSource.clip = GetRandomClip();
-                audioSource.Play();
+                audioSource.clip = GetCurrentClip();
+                AudioListener.pause = MuteScript.muted;
             }
-            else 
+            else
             {
                 audioSource.clip = GetNextClip();
                 audioSource.Play();
             }
-            
+           
         }
     }
 
-    private AudioClip GetRandomClip()
+   
+
+    private AudioClip GetCurrentClip() 
     {
-        return playlist[Random.Range(0, playlist.Length)];
+        return playlist[playlistOrder];
     }
+
 
     private AudioClip GetNextClip() 
     {
         if(playlistOrder >= playlist.Length - 1) 
         {
-            playlistOrder = 1;
+            playlistOrder = 0;
         }
         else 
         {
@@ -58,14 +58,6 @@ public class BackgroundMusic : MonoBehaviour
 
     void Awake() 
     {
-        if (backgroundMusic == null) 
-        {
-            backgroundMusic = this;
-            DontDestroyOnLoad(backgroundMusic);
-        }
-        else 
-        {
-            Destroy(gameObject);
-        }
+        DontDestroyOnLoad(transform.gameObject);
     }
 }
