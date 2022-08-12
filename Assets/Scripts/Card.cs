@@ -16,6 +16,7 @@ public class Card : MonoBehaviour, IPointerDownHandler
     [SerializeField] private Image health;
     [SerializeField] private Image damage;
     [SerializeField] private Image cardImage;
+    [SerializeField] private Image defenseNumber;
 
     [SerializeField] private int cardCost = 0;
     [SerializeField] private int cardHealth = 0;
@@ -32,6 +33,7 @@ public class Card : MonoBehaviour, IPointerDownHandler
     [SerializeField] private GameObject activeEffect;
     [SerializeField] private GameObject playedEffect;
     [SerializeField] private GameObject cardBack;
+    [SerializeField] private GameObject defenseBadge;
 
     public void initialize()
     {
@@ -76,6 +78,19 @@ public class Card : MonoBehaviour, IPointerDownHandler
         } else
         {
             damage.sprite = FontContainer.instance.HealthNumbers[cardDamage];
+        }
+
+        if (transform.parent.name == "DropZone")
+        {
+            if (cardData.cardFaction == "Holy Roman Empire" && armour > 0)
+            {
+                defenseBadge.SetActive(true);
+                defenseNumber.sprite = FontContainer.instance.RedGlowNumbers[armour];
+            } else if (cardData.cardFaction == "Eldritchwood Guardians" && thorns > 0)
+            {
+                defenseBadge.SetActive(true);
+                defenseNumber.sprite = FontContainer.instance.RedGlowNumbers[thorns];
+            }
         }
     }
 
@@ -154,6 +169,7 @@ public class Card : MonoBehaviour, IPointerDownHandler
         card.cardData = cardData;
         card.isDraggable = false;
         card.initialize();
+        card.UpdateCardVisual();
         cardArea.cards.Add(card);
 
         PlayerSwitcher.instance.GetActivePlayer().GetHand().Cards.Remove(gameObject.GetComponent<Card>());
@@ -229,6 +245,7 @@ public class Card : MonoBehaviour, IPointerDownHandler
                 if (playedCard.cardData.isSpell && playedCard.cardData.spellType == "thorn")
                 {
                     thorns += playedCard.cardData.spellPower;
+                    UpdateCardVisual();
                     Destroy(playedCard.gameObject);
                     GameController.instance.PlayedCard = null;
                     return;

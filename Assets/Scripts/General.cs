@@ -10,7 +10,7 @@ public class General : MonoBehaviour, IPointerDownHandler
     public GameObject winScreen;
     public GameObject winBanner;
 
-    public int _health = 20;
+    public int _health = 30;
     public bool isProtected = false;
 
     public void getDamage(int damage)

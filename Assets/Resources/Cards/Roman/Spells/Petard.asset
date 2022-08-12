@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Petard
   m_EditorClassIdentifier: 
   cardTitle: Petard
-  cardDescription: Deal 4 damage to a target unit
+  cardDescription: Deal 3 damage to a target unit
   cardFaction: Holy Roman Empire
   cost: 4
   health: 0
@@ -28,3 +28,4 @@ MonoBehaviour:
   spellType: damage
   spellTarget: single
   summonUnit: 
+  battleCry: 
