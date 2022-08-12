@@ -8,10 +8,11 @@ public class MuteScript : MonoBehaviour
     [SerializeField] Image SoundOnIcon;
     [SerializeField] Image SoundOffIcon;
     [SerializeField] AudioSource audioSource;
-    private bool muted = false;
+    public static bool muted = false;
     
-    void Start() 
+    public void Start() 
     {
+        
         if (!PlayerPrefs.HasKey("muted")) 
         {
             PlayerPrefs.SetInt("muted", 0);
@@ -23,7 +24,6 @@ public class MuteScript : MonoBehaviour
         }
         UpdateButtonIcon();
         AudioListener.pause = muted;
-        
     }
 
     public void OnButtonPress() 
@@ -32,16 +32,18 @@ public class MuteScript : MonoBehaviour
         {
             muted = true;
             AudioListener.pause = true;
+        
         }
         else 
         {
             muted = false;
             AudioListener.pause = false;
+         
         }
         Save();
         UpdateButtonIcon();
     }
-    private void UpdateButtonIcon() 
+    public void UpdateButtonIcon() 
     {
         if (muted == false)
         {
@@ -56,12 +58,12 @@ public class MuteScript : MonoBehaviour
 
     }
 
-    private void Load() 
+   void Load() 
     {
         muted = PlayerPrefs.GetInt("muted") == 1;
     }
 
-    private void Save() 
+    void Save() 
     {
         PlayerPrefs.SetInt("muted", muted ? 1 : 0);
     }
